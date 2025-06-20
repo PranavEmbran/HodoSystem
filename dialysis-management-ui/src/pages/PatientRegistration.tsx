@@ -67,168 +67,168 @@ const PatientRegistration: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: 
     <>
 
       <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
-      {/* <div className={`patient-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}> */}
-      <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
-      <div className="main-container">
-      <div style={{ width: '100%' ,padding: '10px'}}>
-        <SectionHeading title="Patient Registration" subtitle="Register new patients and manage patient details" />
-      </div>
-      <div className="patient-registration-card">
-        {success && (
-          <div className="alert alert-success">
-            Patient registered successfully!
-            <button type="button" className="btn-close" onClick={() => setSuccess(false)}></button>
+        {/* <div className={`patient-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}> */}
+        <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
+        <div className="main-container">
+          <div style={{ width: '100%', padding: '10px' }}>
+            <SectionHeading title="Patient Registration" subtitle="Register new patients and manage patient details" />
           </div>
-        )}
-        {error && (
-          <div className="alert alert-danger">
-            {error}
-            <button type="button" className="btn-close" onClick={() => setError('')}></button>
+          <div className="patient-registration-card">
+            {success && (
+              <div className="alert alert-success">
+                Patient registered successfully!
+                <button type="button" className="btn-close" onClick={() => setSuccess(false)}></button>
+              </div>
+            )}
+            {error && (
+              <div className="alert alert-danger">
+                {error}
+                <button type="button" className="btn-close" onClick={() => setError('')}></button>
+              </div>
+            )}
+            <Formik
+              initialValues={{
+                firstName: '',
+                lastName: '',
+                gender: '',
+                dateOfBirth: '',
+                mobileNo: '',
+                bloodGroup: '',
+                catheterInsertionDate: '',
+                fistulaCreationDate: ''
+              }}
+              validationSchema={validationSchema}
+              onSubmit={handleSubmit}
+            >
+              {({ isSubmitting }) => (
+                <Form className="patient-registration-form">
+                  <div className="row">
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <label htmlFor="firstName" className="form-label">First Name</label>
+                        <Field
+                          type="text"
+                          id="firstName"
+                          name="firstName"
+                          className="form-control"
+                        />
+                        <ErrorMessage name="firstName" component="div" className="text-danger" />
+                      </div>
+                    </div>
+
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <label htmlFor="lastName" className="form-label">Last Name</label>
+                        <Field
+                          type="text"
+                          id="lastName"
+                          name="lastName"
+                          className="form-control"
+                        />
+                        <ErrorMessage name="lastName" component="div" className="text-danger" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <label htmlFor="gender" className="form-label">Gender</label>
+                        <Field as="select" id="gender" name="gender" className="form-select">
+                          <option value="">Select Gender</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                          <option value="Other">Other</option>
+                        </Field>
+                        <ErrorMessage name="gender" component="div" className="text-danger" />
+                      </div>
+                    </div>
+
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <label htmlFor="dateOfBirth" className="form-label">Date of Birth</label>
+                        <Field
+                          type="date"
+                          id="dateOfBirth"
+                          name="dateOfBirth"
+                          className="form-control"
+                        />
+                        <ErrorMessage name="dateOfBirth" component="div" className="text-danger" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <label htmlFor="mobileNo" className="form-label">Mobile Number</label>
+                        <Field
+                          type="text"
+                          id="mobileNo"
+                          name="mobileNo"
+                          className="form-control"
+                          placeholder="10-digit mobile number"
+                        />
+                        <ErrorMessage name="mobileNo" component="div" className="text-danger" />
+                      </div>
+                    </div>
+
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <label htmlFor="bloodGroup" className="form-label">Blood Group</label>
+                        <Field as="select" id="bloodGroup" name="bloodGroup" className="form-select">
+                          <option value="">Select Blood Group</option>
+                          {bloodGroups.map(group => (
+                            <option key={group} value={group}>{group}</option>
+                          ))}
+                        </Field>
+                        <ErrorMessage name="bloodGroup" component="div" className="text-danger" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <label htmlFor="catheterInsertionDate" className="form-label">Catheter Insertion Date</label>
+                        <Field
+                          type="date"
+                          id="catheterInsertionDate"
+                          name="catheterInsertionDate"
+                          className="form-control"
+                        />
+                        <ErrorMessage name="catheterInsertionDate" component="div" className="text-danger" />
+                      </div>
+                    </div>
+
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <label htmlFor="fistulaCreationDate" className="form-label">Fistula Creation Date</label>
+                        <Field
+                          type="date"
+                          id="fistulaCreationDate"
+                          name="fistulaCreationDate"
+                          className="form-control"
+                        />
+                        <ErrorMessage name="fistulaCreationDate" component="div" className="text-danger" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="text-center mt-4">
+                    <button
+                      type="submit"
+                      // className="btn btn-primary"
+                      className="btn-with-gradient mx-auto block"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? 'Registering...' : 'Register Patient'}
+                    </button>
+                  </div>
+                </Form>
+              )}
+            </Formik>
           </div>
-        )}
-        <Formik
-          initialValues={{
-            firstName: '',
-            lastName: '',
-            gender: '',
-            dateOfBirth: '',
-            mobileNo: '',
-            bloodGroup: '',
-            catheterInsertionDate: '',
-            fistulaCreationDate: ''
-          }}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          {({ isSubmitting }) => (
-            <Form className="patient-registration-form">
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="firstName" className="form-label">First Name</label>
-                    <Field
-                      type="text"
-                      id="firstName"
-                      name="firstName"
-                      className="form-control"
-                    />
-                    <ErrorMessage name="firstName" component="div" className="text-danger" />
-                  </div>
-                </div>
-
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="lastName" className="form-label">Last Name</label>
-                    <Field
-                      type="text"
-                      id="lastName"
-                      name="lastName"
-                      className="form-control"
-                    />
-                    <ErrorMessage name="lastName" component="div" className="text-danger" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="gender" className="form-label">Gender</label>
-                    <Field as="select" id="gender" name="gender" className="form-select">
-                      <option value="">Select Gender</option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                      <option value="Other">Other</option>
-                    </Field>
-                    <ErrorMessage name="gender" component="div" className="text-danger" />
-                  </div>
-                </div>
-
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="dateOfBirth" className="form-label">Date of Birth</label>
-                    <Field
-                      type="date"
-                      id="dateOfBirth"
-                      name="dateOfBirth"
-                      className="form-control"
-                    />
-                    <ErrorMessage name="dateOfBirth" component="div" className="text-danger" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="mobileNo" className="form-label">Mobile Number</label>
-                    <Field
-                      type="text"
-                      id="mobileNo"
-                      name="mobileNo"
-                      className="form-control"
-                      placeholder="10-digit mobile number"
-                    />
-                    <ErrorMessage name="mobileNo" component="div" className="text-danger" />
-                  </div>
-                </div>
-
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="bloodGroup" className="form-label">Blood Group</label>
-                    <Field as="select" id="bloodGroup" name="bloodGroup" className="form-select">
-                      <option value="">Select Blood Group</option>
-                      {bloodGroups.map(group => (
-                        <option key={group} value={group}>{group}</option>
-                      ))}
-                    </Field>
-                    <ErrorMessage name="bloodGroup" component="div" className="text-danger" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="catheterInsertionDate" className="form-label">Catheter Insertion Date</label>
-                    <Field
-                      type="date"
-                      id="catheterInsertionDate"
-                      name="catheterInsertionDate"
-                      className="form-control"
-                    />
-                    <ErrorMessage name="catheterInsertionDate" component="div" className="text-danger" />
-                  </div>
-                </div>
-
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="fistulaCreationDate" className="form-label">Fistula Creation Date</label>
-                    <Field
-                      type="date"
-                      id="fistulaCreationDate"
-                      name="fistulaCreationDate"
-                      className="form-control"
-                    />
-                    <ErrorMessage name="fistulaCreationDate" component="div" className="text-danger" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="text-center mt-4">
-                <button
-                  type="submit"
-                  // className="btn btn-primary"
-                  className="btn-with-gradient mx-auto block"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Registering...' : 'Register Patient'}
-                </button>
-              </div>
-            </Form>
-          )}
-        </Formik>
-      </div>
         </div>
         <Footer />
       </Container>

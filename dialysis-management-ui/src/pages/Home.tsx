@@ -235,7 +235,9 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
 
   if (error) {
     return (
-      <Container fluid className="home-container py-5">
+      // <Container fluid className="home-container py-5">
+      <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
+
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
         <div className="alert alert-danger" role="alert">
           <h4>Error Loading Data</h4>
@@ -249,7 +251,7 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
   return (
     <>
       <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
-      {/* <div className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}> */}
+        {/* <div className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}> */}
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
         <div className="main-container">
 
