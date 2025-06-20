@@ -151,10 +151,11 @@ const DialysisProcess: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () =
 
   return (
     <>
-    <Container fluid className={`dialysis-process-container py-3 ${sidebarCollapsed ? 'collapsed' : ''}`}>
+    {/* <Container fluid className={`dialysis-process-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}> */}
+    <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
     <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
     <div className="main-container">
-      <div style={{ width: '100%' ,padding: '20px'}}>
+      <div style={{ width: '100%' ,padding: '10px'}}>
         <SectionHeading title="Dialysis Process" subtitle="Monitor and record dialysis procedures" />
       </div>
       <Row>

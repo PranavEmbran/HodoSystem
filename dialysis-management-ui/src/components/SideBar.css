@@ -40,7 +40,8 @@
     margin-bottom: 20px;
     text-align: center;
     font-weight: bold;
-    font-family: 'Poppins', sans-serif;
+    /* font-family: 'Poppins', sans-serif; */
+    font-family: 'Poppins';
 }
 
 .sidebar ul {
@@ -150,7 +151,7 @@
     height: 56px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2.5px solid #80def7;
+    border: 2.5px solid #038ba4;
     background: #fff;
     box-shadow: 0 2px 8px 0 #0002;
 }
@@ -166,7 +167,7 @@
 .sidebar-header-hospital {
     /* color: #00c6e6; */
     color: #038ba4;
-    font-size: 15px;
+    font-size: 18px;
     /* font-weight: 700; */
     text-align: center;
     margin-bottom: 2px;

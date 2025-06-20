@@ -189,7 +189,8 @@ color: #ffffff;
   margin-bottom: 20px;
   text-align: center;
   font-weight: bold;
-  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: 'Poppins';
 }
 
 .nav-links {

@@ -41,7 +41,7 @@
     color: white;
     text-decoration: none;
     /* font-weight: 500; */
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .nav-list li a:hover {
@@ -200,7 +200,7 @@
   }
   .nav-list2 li a {
     padding: 6px 8px;
-    font-size: 12px;
+    font-size: 14px;
   }
   .searchBar input {
     width: 350px;
@@ -235,7 +235,7 @@
   }
   .nav-list2 li a {
     padding: 5px 6px;
-    font-size: 11px;
+    font-size: 14px;
   }
   .searchBar input {
     width: 200px;
@@ -251,7 +251,7 @@
   }
   .nav-list2 li a {
     padding: 4px 5px;
-    font-size: 10px;
+    font-size: 14px;
   }
   .searchBar input {
     width: 180px;
@@ -264,13 +264,13 @@
   }
   .nav-list2 li a {
     padding: 3px 4px;
-    font-size: 9px;
+    font-size: 14px;
   }
   .searchBar input {
     width: 160px;
   }
   .nav-list-button {
-    font-size: 11px;
+    font-size: 14px;
     padding: 3px 5px;
   }
 }
@@ -294,7 +294,7 @@
   color: #fff;
   border: none;
   border-radius: 3px;
-  font-size: 15px;
+  font-size: 14px;
   padding: 8px 16px;
   cursor: pointer;
   align-items: center;
@@ -317,7 +317,7 @@
   color: #fff;
   text-decoration: none;
   padding: 12px 20px;
-  font-size: 15px;
+  font-size: 14px;
   border-bottom: 1px solid #222;
   transition: background 0.2s, color 0.2s;
 }
@@ -380,7 +380,7 @@
   color: #ccc;
   border: none;
   border-radius: 3px;
-  font-size: 12px;
+  font-size: 14px;
   padding: 6px 12px;
   cursor: pointer;
   align-items: center;

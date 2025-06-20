@@ -114,7 +114,7 @@ const TopNav: React.FC<TopNavProps> = ({ searchQuery, setSearchQuery }) => {
           />
         </div>
         <li className='nav-list-button'><NavLink to="/dashboard" className={({ isActive }) => isActive ? 'active' : ''}>Dashboard</NavLink></li>
-        <li className='nav-list-button'><NavLink to="/process" className={({ isActive }) => isActive ? 'active' : ''}>Start Dialysis</NavLink></li>
+        <li className='nav-list-button'><NavLink to="/registration" className={({ isActive }) => isActive ? 'active' : ''}>+ Add Patient</NavLink></li>
         <div className="nav-div-main">
           <div className="nav-div">
             <a href="#" className="nav-link text-white" title="Search Patient" onClick={(e) => {

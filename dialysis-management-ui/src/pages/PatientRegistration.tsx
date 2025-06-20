@@ -7,7 +7,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { Patient } from '../types';
 import SectionHeading from '../components/SectionHeading';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 
 interface PatientFormValues {
   firstName: string;
@@ -66,8 +66,8 @@ const PatientRegistration: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: 
   return (
     <>
 
-      {/* <div className="page-container border border-danger"> */}
-      <div className={`patient-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
+      <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
+      {/* <div className={`patient-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}> */}
       <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
       <div className="main-container">
       <div style={{ width: '100%' ,padding: '10px'}}>
@@ -229,9 +229,9 @@ const PatientRegistration: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: 
           )}
         </Formik>
       </div>
-      </div>
-      <Footer />
-      </div>
+        </div>
+        <Footer />
+      </Container>
     </>
   );
 };

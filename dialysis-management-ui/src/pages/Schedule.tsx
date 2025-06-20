@@ -91,10 +91,10 @@ const Schedule: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void 
 
   return (
     <>
-    <Container fluid className={`home-container py-5 ${sidebarCollapsed ? 'collapsed' : ''}`}>
+    <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
     <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
     <div className="main-container">
-      <div style={{ width: '100%' ,padding: '20px'}}>
+      <div style={{ width: '100%' ,padding: '10px'}}>
         <SectionHeading title="Schedule" subtitle="Manage and view dialysis appointments" />
       </div>
       <Row className="mb-4">

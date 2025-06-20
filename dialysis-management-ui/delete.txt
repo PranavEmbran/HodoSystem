@@ -4,7 +4,11 @@ Delete:
 
 
 
+
 Deleted:
+C:\Users\Pranav\Desktop\Dialysis_Management_System\dialysis-management-ui\src\pages\StartDialysisPage.tsx
+C:\Users\Pranav\Desktop\Dialysis_Management_System\dialysis-management-ui\src\components\DialysisHistory.tsx
+C:\Users\Pranav\Desktop\Dialysis_Management_System\dialysis-management-ui\src\components\StartDialysis.css
 C:\Users\Pranav\Desktop\dialysis-TS\dialysis-management-ui\src\components\StartDialysis.tsx
 C:\Users\Pranav\Desktop\dialysis-TS\dialysis-management-ui\src\components\ScheduleDialysis.tsx
 C:\Users\Pranav\Desktop\dialysis-TS\dialysis-management-ui\src\components\DialysisRegistration.tsx

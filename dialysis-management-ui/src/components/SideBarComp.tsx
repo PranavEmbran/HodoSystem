@@ -19,7 +19,8 @@ const SideBar: React.FC<SideBarCompProps> = ({ collapsed = false }) => {
                 <div className="sidebar-header-section">
                     <div className="sidebar-header-top-wrap">
                         <div className="sidebar-header-img-wrap">
-                            <img src="/HoDo-LOGO-BLUE150.png" alt="Profile" className="sidebar-header-img" />
+                            {/* <img src="/HoDo-LOGO-BLUE150.png" alt="Profile" className="sidebar-header-img" /> */}
+                            <img src="/profileimg.jpg" alt="Profile" className="sidebar-header-img" />
                         </div>
                         <div className="sidebar-header-text-wrap">
                     <div className="sidebar-header-role-top">System Admin</div>

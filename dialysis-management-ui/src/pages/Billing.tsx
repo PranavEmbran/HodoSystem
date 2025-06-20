@@ -98,7 +98,7 @@ const validationSchema = Yup.object({
 
   return (
     <>
-      <Container fluid className={`billing-container py-5 ${sidebarCollapsed ? 'collapsed' : ''}`}>
+      <Container fluid className={`billing-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
         <div className="main-container">
 
