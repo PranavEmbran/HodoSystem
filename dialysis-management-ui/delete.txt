@@ -1,0 +1,6 @@
+delete 
+C:\Users\Pranav\Desktop\dialysis-TS\dialysis-management-ui\src\components\StartDialysis.tsx
+C:\Users\Pranav\Desktop\dialysis-TS\dialysis-management-ui\src\components\ScheduleDialysis.tsx
+C:\Users\Pranav\Desktop\dialysis-TS\dialysis-management-ui\src\components\DialysisRegistration.tsx
+C:\Users\Pranav\Desktop\dialysis-TS\dialysis-management-ui\src\pages\HistoryPage.tsx
+C:\Users\Pranav\Desktop\dialysis-TS\dialysis-management-ui\src\components\Billing.tsx
