@@ -62,7 +62,8 @@ const History: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void }
   return (
     <>
       {/* <div className={`history-container ${sidebarCollapsed ? 'collapsed' : ''}`}> */}
-      <Container fluid className={`history-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
+      {/* <Container fluid className={`history-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}> */}
+      <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
         <div className="main-container">
           <div style={{ width: '100%', padding: '10px' }}>

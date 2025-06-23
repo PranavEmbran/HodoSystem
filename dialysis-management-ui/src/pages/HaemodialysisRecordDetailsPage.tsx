@@ -8,7 +8,8 @@ import { Row, Col, Container } from 'react-bootstrap';
 const HaemodialysisRecordDetailsPage: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void }> = ({ sidebarCollapsed, toggleSidebar }) => {
   return (
     // <div className={`haemodialysis-record-page-container ${sidebarCollapsed ? 'collapsed' : ''}`}>
-    <Container fluid className={`haemodialysis-record-page-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
+    // <Container fluid className={`haemodialysis-record-page-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
+    <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
       <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
       <div className="main-container">
         <div style={{ width: '100%', padding: '10px' }}>

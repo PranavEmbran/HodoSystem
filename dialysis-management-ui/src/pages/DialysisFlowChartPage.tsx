@@ -12,7 +12,8 @@ const DialysisFlowChartPage: React.FC<{ sidebarCollapsed: boolean; toggleSidebar
 
   return (
     // <div className={`dialysis-flow-chart-container ${sidebarCollapsed ? 'collapsed' : ''}`}>
-    <Container fluid className={`dialysis-flow-chart-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
+    // <Container fluid className={`dialysis-flow-chart-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
+    <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
 
       <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
       <div className="main-container">
