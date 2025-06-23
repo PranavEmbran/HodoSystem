@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
+import { generatePatientId } from '../utils/patientIdGenerator';
 
 const router = express.Router();
 
@@ -48,9 +49,11 @@ router.get('/patients', (req: Request, res: Response) => {
 router.post('/patients', (req: Request, res: Response) => {
   try {
     const db = readDatabase();
+    // Use catheterInsertionDate as registration date for ID
+    const newPatientId = generatePatientId(req.body.catheterInsertionDate);
     const patient = {
       ...req.body,
-      id: Date.now().toString()
+      id: newPatientId
     };
     
     db.patients.push(patient);

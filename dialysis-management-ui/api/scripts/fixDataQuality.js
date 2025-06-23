@@ -225,14 +225,53 @@ function runAllFixes() {
   }
 }
 
-// Run the fixes
-if (require.main === module) {
-  runAllFixes();
+// --- MIGRATION: Update patient IDs to new format ---
+function migratePatientIds() {
+  console.log('\uD83D\uDD27 Migrating patient IDs to new format...');
+  const db = readDatabase();
+  if (!db.patients) return 0;
+  // Build a map of date -> patients for deterministic serial assignment
+  const dateToPatients = {};
+  db.patients.forEach(patient => {
+    const regDate = patient.catheterInsertionDate || patient.fistulaCreationDate || '2000-01-01';
+    const dateObj = new Date(regDate);
+    const yyyy = dateObj.getFullYear();
+    const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const dd = String(dateObj.getDate()).padStart(2, '0');
+    const dateStr = `${yyyy}${mm}${dd}`;
+    if (!dateToPatients[dateStr]) dateToPatients[dateStr] = [];
+    dateToPatients[dateStr].push(patient);
+  });
+  db.patientSerials = {};
+  let migratedCount = 0;
+  // For each date, assign serials in order of appearance
+  Object.entries(dateToPatients).forEach(([dateStr, patients]) => {
+    patients.forEach((patient, idx) => {
+      const serial = idx + 1;
+      db.patientSerials[dateStr] = serial;
+      const serialStr = String(serial).padStart(3, '0');
+      const newId = `${dateStr}/${serialStr}`;
+      if (patient.id !== newId) {
+        patient.id = newId;
+        migratedCount++;
+      }
+    });
+  });
+  writeDatabase(db);
+  console.log(`\u2705 Migrated ${migratedCount} patient IDs to new format.`);
+  return migratedCount;
 }
 
-module.exports = { 
-  fixDuplicateMobileNumbers, 
-  addMissingMedicalDates, 
+// Run migration if script is executed directly
+if (require.main === module) {
+  runAllFixes();
+  migratePatientIds();
+}
+
+module.exports = {
+  fixDuplicateMobileNumbers,
+  addMissingMedicalDates,
   standardizeDateFormats,
-  runAllFixes 
+  runAllFixes,
+  migratePatientIds
 }; 

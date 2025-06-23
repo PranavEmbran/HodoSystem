@@ -14,6 +14,7 @@
     "formik": "^2.4.5",
     "html2pdf.js": "^0.10.1",
     "lucide-react": "^0.515.0",
+    "proper-lockfile": "^4.1.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^18.2.0",

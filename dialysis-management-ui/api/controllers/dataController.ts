@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { Request, Response } from 'express';
+import { generatePatientId } from '../utils/patientIdGenerator';
 
 const dbPath = path.join(__dirname, '../db/db.json');
 
@@ -119,23 +120,23 @@ function writeDB(data: Database): void {
 }
 
 // Patients
-export const getPatients = (req: Request, res: Response): void => {
+export const getPatients = (req: Request, res: Response): any => {
   try {
     console.log('Fetching all patients...');
     const db = readDB();
     const patients = db.patients || [];
     console.log(`Found ${patients.length} patients`);
-    res.json(patients);
+    return res.json(patients);
   } catch (error) {
     console.error('Error in getPatients:', error);
-    res.status(500).json({ 
+    return res.status(500).json({ 
       message: 'Failed to get patients',
       error: error instanceof Error ? error.message : 'Unknown error'
     });
   }
 };
 
-export const addPatient = (req: Request, res: Response): void => {
+export const addPatient = (req: Request, res: Response): any => {
   try {
     console.log('Adding new patient:', req.body);
     const { firstName, lastName, gender, dateOfBirth, mobileNo, bloodGroup, catheterInsertionDate, fistulaCreationDate } = req.body;
@@ -158,8 +159,10 @@ export const addPatient = (req: Request, res: Response): void => {
     }
 
     const db = readDB();
+    // Always use generatePatientId for new patient
+    const newPatientId = generatePatientId(catheterInsertionDate);
     const newPatient: Patient = {
-      id: Date.now().toString(),
+      id: newPatientId,
       firstName,
       lastName,
       gender,
@@ -173,17 +176,17 @@ export const addPatient = (req: Request, res: Response): void => {
     db.patients.push(newPatient);
     writeDB(db);
     console.log('Successfully added new patient:', newPatient);
-    res.status(201).json(newPatient);
+    return res.status(201).json(newPatient);
   } catch (error) {
     console.error('Error in addPatient:', error);
-    res.status(500).json({ 
+    return res.status(500).json({ 
       message: 'Failed to add patient',
       error: error instanceof Error ? error.message : 'Unknown error'
     });
   }
 };
 
-export const deletePatient = (req: Request, res: Response): void => {
+export const deletePatient = (req: Request, res: Response): any => {
   try {
     const patientId = req.params.id;
     console.log('Deleting patient with ID:', patientId);
@@ -204,10 +207,10 @@ export const deletePatient = (req: Request, res: Response): void => {
 
     writeDB(db);
     console.log('Successfully deleted patient:', patientId);
-    res.status(204).end();
+    return res.status(204).end();
   } catch (error) {
     console.error('Error in deletePatient:', error);
-    res.status(500).json({ 
+    return res.status(500).json({ 
       message: 'Failed to delete patient',
       error: error instanceof Error ? error.message : 'Unknown error'
     });
@@ -215,23 +218,23 @@ export const deletePatient = (req: Request, res: Response): void => {
 };
 
 // Appointments
-export const getAppointments = (req: Request, res: Response): void => {
+export const getAppointments = (req: Request, res: Response): any => {
   try {
     console.log('Fetching all appointments...');
     const db = readDB();
     const appointments = db.appointments || [];
     console.log(`Found ${appointments.length} appointments`);
-    res.json(appointments);
+    return res.json(appointments);
   } catch (error) {
     console.error('Error in getAppointments:', error);
-    res.status(500).json({ 
+    return res.status(500).json({ 
       message: 'Failed to get appointments',
       error: error instanceof Error ? error.message : 'Unknown error'
     });
   }
 };
 
-export const addAppointment = (req: Request, res: Response): void => {
+export const addAppointment = (req: Request, res: Response): any => {
   try {
     console.log('Adding new appointment:', req.body);
     const db = readDB();
@@ -239,17 +242,17 @@ export const addAppointment = (req: Request, res: Response): void => {
     db.appointments.push(newAppointment);
     writeDB(db);
     console.log('Successfully added new appointment:', newAppointment);
-    res.status(201).json(newAppointment);
+    return res.status(201).json(newAppointment);
   } catch (error) {
     console.error('Error in addAppointment:', error);
-    res.status(500).json({ 
+    return res.status(500).json({ 
       message: 'Failed to add appointment',
       error: error instanceof Error ? error.message : 'Unknown error'
     });
   }
 };
 
-export const deleteAppointment = (req: Request, res: Response): void => {
+export const deleteAppointment = (req: Request, res: Response): any => {
   try {
     const appointmentId = req.params.id;
     console.log('Deleting appointment with ID:', appointmentId);
@@ -257,10 +260,10 @@ export const deleteAppointment = (req: Request, res: Response): void => {
     db.appointments = db.appointments.filter(a => a.id !== appointmentId);
     writeDB(db);
     console.log('Successfully deleted appointment:', appointmentId);
-    res.status(204).end();
+    return res.status(204).end();
   } catch (error) {
     console.error('Error in deleteAppointment:', error);
-    res.status(500).json({ 
+    return res.status(500).json({ 
       message: 'Failed to delete appointment',
       error: error instanceof Error ? error.message : 'Unknown error'
     });
@@ -268,23 +271,23 @@ export const deleteAppointment = (req: Request, res: Response): void => {
 };
 
 // Billing
-export const getBilling = (req: Request, res: Response): void => {
+export const getBilling = (req: Request, res: Response): any => {
   try {
     console.log('Fetching all billing records...');
     const db = readDB();
     const billing = db.billing || [];
     console.log(`Found ${billing.length} billing records`);
-    res.json(billing);
+    return res.json(billing);
   } catch (error) {
     console.error('Error in getBilling:', error);
-    res.status(500).json({ 
+    return res.status(500).json({ 
       message: 'Failed to get billing',
       error: error instanceof Error ? error.message : 'Unknown error'
     });
   }
 };
 
-export const addBilling = (req: Request, res: Response): void => {
+export const addBilling = (req: Request, res: Response): any => {
   try {
     console.log('Adding new billing record:', req.body);
     const db = readDB();
@@ -292,17 +295,17 @@ export const addBilling = (req: Request, res: Response): void => {
     db.billing.push(newBilling);
     writeDB(db);
     console.log('Successfully added new billing record:', newBilling);
-    res.status(201).json(newBilling);
+    return res.status(201).json(newBilling);
   } catch (error) {
     console.error('Error in addBilling:', error);
-    res.status(500).json({ 
+    return res.status(500).json({ 
       message: 'Failed to add billing',
       error: error instanceof Error ? error.message : 'Unknown error'
     });
   }
 };
 
-export const deleteBilling = (req: Request, res: Response): void => {
+export const deleteBilling = (req: Request, res: Response): any => {
   try {
     const billingId = req.params.id;
     console.log('Deleting billing record with ID:', billingId);
@@ -310,10 +313,10 @@ export const deleteBilling = (req: Request, res: Response): void => {
     db.billing = db.billing.filter(b => b.id !== billingId);
     writeDB(db);
     console.log('Successfully deleted billing record:', billingId);
-    res.status(204).end();
+    return res.status(204).end();
   } catch (error) {
     console.error('Error in deleteBilling:', error);
-    res.status(500).json({ 
+    return res.status(500).json({ 
       message: 'Failed to delete billing',
       error: error instanceof Error ? error.message : 'Unknown error'
     });
@@ -321,23 +324,23 @@ export const deleteBilling = (req: Request, res: Response): void => {
 };
 
 // History
-export const getHistory = (req: Request, res: Response): void => {
+export const getHistory = (req: Request, res: Response): any => {
   try {
     console.log('Fetching all history records...');
     const db = readDB();
     const history = db.history || [];
     console.log(`Found ${history.length} history records`);
-    res.json(history);
+    return res.json(history);
   } catch (error) {
     console.error('Error in getHistory:', error);
-    res.status(500).json({ 
+    return res.status(500).json({ 
       message: 'Failed to get history',
       error: error instanceof Error ? error.message : 'Unknown error'
     });
   }
 };
 
-export const addHistory = (req: Request, res: Response): void => {
+export const addHistory = (req: Request, res: Response): any => {
   try {
     console.log('Adding new history record:', req.body);
     const db = readDB();
@@ -345,17 +348,17 @@ export const addHistory = (req: Request, res: Response): void => {
     db.history.push(newHistory);
     writeDB(db);
     console.log('Successfully added new history record:', newHistory);
-    res.status(201).json(newHistory);
+    return res.status(201).json(newHistory);
   } catch (error) {
     console.error('Error in addHistory:', error);
-    res.status(500).json({ 
+    return res.status(500).json({ 
       message: 'Failed to add history',
       error: error instanceof Error ? error.message : 'Unknown error'
     });
   }
 };
 
-export const deleteHistory = (req: Request, res: Response): void => {
+export const deleteHistory = (req: Request, res: Response): any => {
   try {
     const historyId = req.params.id;
     console.log('Deleting history record with ID:', historyId);
@@ -363,10 +366,10 @@ export const deleteHistory = (req: Request, res: Response): void => {
     db.history = db.history.filter(h => h.id !== historyId);
     writeDB(db);
     console.log('Successfully deleted history record:', historyId);
-    res.status(204).end();
+    return res.status(204).end();
   } catch (error) {
     console.error('Error in deleteHistory:', error);
-    res.status(500).json({ 
+    return res.status(500).json({ 
       message: 'Failed to delete history',
       error: error instanceof Error ? error.message : 'Unknown error'
     });
@@ -374,7 +377,7 @@ export const deleteHistory = (req: Request, res: Response): void => {
 };
 
 // Staff
-export const getStaff = (req: Request, res: Response): void => {
+export const getStaff = (req: Request, res: Response): any => {
   try {
     console.log('Fetching staff data...');
     const staffData: StaffData = {
@@ -382,10 +385,10 @@ export const getStaff = (req: Request, res: Response): void => {
       doctors: ['Dr. Brown', 'Dr. Wilson', 'Dr. Davis'],
       units: ['Unit A', 'Unit B', 'Unit C']
     };
-    res.json(staffData);
+    return res.json(staffData);
   } catch (error) {
     console.error('Error in getStaff:', error);
-    res.status(500).json({ 
+    return res.status(500).json({ 
       message: 'Failed to get staff data',
       error: error instanceof Error ? error.message : 'Unknown error'
     });
@@ -393,23 +396,23 @@ export const getStaff = (req: Request, res: Response): void => {
 };
 
 // Dialysis Flow Charts
-export const getDialysisFlowCharts = (req: Request, res: Response): void => {
+export const getDialysisFlowCharts = (req: Request, res: Response): any => {
   try {
     console.log('Fetching all dialysis flow charts...');
     const db = readDB();
     const dialysisFlowCharts = db.dialysisFlowCharts || [];
     console.log(`Found ${dialysisFlowCharts.length} dialysis flow charts`);
-    res.json(dialysisFlowCharts);
+    return res.json(dialysisFlowCharts);
   } catch (error) {
     console.error('Error in getDialysisFlowCharts:', error);
-    res.status(500).json({ 
+    return res.status(500).json({ 
       message: 'Failed to get dialysis flow charts',
       error: error instanceof Error ? error.message : 'Unknown error'
     });
   }
 };
 
-export const addDialysisFlowChart = (req: Request, res: Response): void => {
+export const addDialysisFlowChart = (req: Request, res: Response): any => {
   try {
     console.log('Adding new dialysis flow chart:', req.body);
     const db = readDB();
@@ -420,17 +423,17 @@ export const addDialysisFlowChart = (req: Request, res: Response): void => {
     db.dialysisFlowCharts.push(newDialysisFlowChart);
     writeDB(db);
     console.log('Successfully added new dialysis flow chart:', newDialysisFlowChart);
-    res.status(201).json(newDialysisFlowChart);
+    return res.status(201).json(newDialysisFlowChart);
   } catch (error) {
     console.error('Error in addDialysisFlowChart:', error);
-    res.status(500).json({ 
+    return res.status(500).json({ 
       message: 'Failed to add dialysis flow chart',
       error: error instanceof Error ? error.message : 'Unknown error'
     });
   }
 };
 
-export const deleteDialysisFlowChart = (req: Request, res: Response): void => {
+export const deleteDialysisFlowChart = (req: Request, res: Response): any => {
   try {
     const dialysisFlowChartId = req.params.id;
     console.log('Deleting dialysis flow chart with ID:', dialysisFlowChartId);
@@ -438,10 +441,10 @@ export const deleteDialysisFlowChart = (req: Request, res: Response): void => {
     db.dialysisFlowCharts = db.dialysisFlowCharts.filter(d => d.id !== dialysisFlowChartId);
     writeDB(db);
     console.log('Successfully deleted dialysis flow chart:', dialysisFlowChartId);
-    res.status(204).end();
+    return res.status(204).end();
   } catch (error) {
     console.error('Error in deleteDialysisFlowChart:', error);
-    res.status(500).json({ 
+    return res.status(500).json({ 
       message: 'Failed to delete dialysis flow chart',
       error: error instanceof Error ? error.message : 'Unknown error'
     });
@@ -449,16 +452,16 @@ export const deleteDialysisFlowChart = (req: Request, res: Response): void => {
 };
 
 // Haemodialysis Records
-export const getHaemodialysisRecords = (req: Request, res: Response): void => {
+export const getHaemodialysisRecords = (req: Request, res: Response): any => {
   try {
     const db = readDB();
-    res.json(db.haemodialysisRecords || []);
+    return res.json(db.haemodialysisRecords || []);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch haemodialysis records' });
+    return res.status(500).json({ error: 'Failed to fetch haemodialysis records' });
   }
 };
 
-export const addHaemodialysisRecord = (req: Request, res: Response): void => {
+export const addHaemodialysisRecord = (req: Request, res: Response): any => {
   try {
     const db = readDB();
     const newRecord: HaemodialysisRecord = {
@@ -467,8 +470,8 @@ export const addHaemodialysisRecord = (req: Request, res: Response): void => {
     };
     db.haemodialysisRecords.push(newRecord);
     writeDB(db);
-    res.status(201).json(newRecord);
+    return res.status(201).json(newRecord);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to add haemodialysis record' });
+    return res.status(500).json({ error: 'Failed to add haemodialysis record' });
   }
 }; 

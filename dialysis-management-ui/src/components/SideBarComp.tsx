@@ -97,7 +97,7 @@ const SideBar: React.FC<SideBarCompProps> = ({ collapsed = false }) => {
                             title={collapsed ? "Haemodialysis Record Details" : ""}
                         >
                             <FaCaretRight size={22} />
-                            {!collapsed && "Haemodialysis Record Details"}
+                            {!collapsed && "HD Record"}
                         </NavLink>
                     </li>
                     <li>

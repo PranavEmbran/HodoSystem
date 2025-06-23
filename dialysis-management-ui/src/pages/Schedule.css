@@ -20,7 +20,7 @@
 }
 
 .home-title {
-  color: #2c3e50;
+  /* color: #2c3e50; */
   font-weight: 600;
   margin-bottom: 1rem;
 }
@@ -30,7 +30,7 @@
 }
 
 .form-label {
-  color: #495057;
+  /* color: #495057; */
   font-weight: 500;
   margin-bottom: 0.5rem;
 }
@@ -114,7 +114,7 @@
 
 .table th {
   font-weight: 600;
-  color: #2c3e50;
+  /* color: #2c3e50; */
   border-bottom: 2px solid #e9ecef;
 }
 

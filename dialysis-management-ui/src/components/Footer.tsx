@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
     <div className='footer-container'>
       <div className="footer-left">
         <span> © 2025 </span>
-        <a href="#">www.hodo.com</a>
+        <a href="https://hodo.in/">www.hodo.in</a>
         <span>Empowering Entrepreneurs in Healthcare </span>
         <a href="#" onClick={e => { e.preventDefault(); setShortcutsOpen(true); }}>Short Cuts</a>
       </div>

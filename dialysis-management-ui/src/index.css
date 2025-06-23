@@ -58,6 +58,7 @@ font-size: 12px;
 
 /* Card styles */
 .card {
+  /* position: relative; */
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -77,6 +78,7 @@ font-size: 12px;
 
 .card-body {
   padding: 20px;
+  /* width: auto; */
   /* border-top: 5px solid #0097a7; */
 }
 

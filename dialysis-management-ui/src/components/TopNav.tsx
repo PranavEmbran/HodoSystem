@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { FaSearch, FaBell, FaCog, FaChevronDown, FaBars } from 'react-icons/fa';
+import { FaSearch, FaBell, FaCog, FaChevronDown, FaBars} from 'react-icons/fa';
 import './TopNav.css';
 
 interface TopNavProps {
@@ -113,7 +113,7 @@ const TopNav: React.FC<TopNavProps> = ({ searchQuery, setSearchQuery }) => {
             onChange={e => setSearchQuery(e.target.value)}
           />
         </div>
-        <li className='nav-list-button'><NavLink to="/dashboard" className={({ isActive }) => isActive ? 'active' : ''}>Dashboard</NavLink></li>
+        <li className='nav-list-button'><NavLink to="/billing" className={({ isActive }) => isActive ? 'active' : ''}>New Sale</NavLink></li>
         <li className='nav-list-button'><NavLink to="/registration" className={({ isActive }) => isActive ? 'active' : ''}>+ Add Patient</NavLink></li>
         <div className="nav-div-main">
           <div className="nav-div">

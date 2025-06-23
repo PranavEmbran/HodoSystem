@@ -261,7 +261,8 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
           <Row className="mb-4">
             {stats.map((stat) => (
               <Col key={stat.label} md={4} className="mb-3 d-flex">
-                <div className="dashboard-card text-center p-4 shadow-sm rounded bg-white w-100 d-flex flex-column align-items-center justify-content-center">
+                {/* <div className="dashboard-card text-center p-4 shadow-sm rounded bg-white w-100 d-flex flex-column align-items-center justify-content-center"> */}
+                <div className="dashboard-card text-center">
                   <div className="dashboard-icon mb-2">{stat.icon}</div>
                   <div className="dashboard-value mb-1">{stat.value}</div>
                   <div className="dashboard-label">{stat.label}</div>

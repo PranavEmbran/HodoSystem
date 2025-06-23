@@ -18,8 +18,7 @@ const allowedOrigins: string[] = [
   'http://localhost:3003',
   'http://localhost:3004',
   'http://localhost:3005',
-  'http://192.168.50.33:3000',
-  'http://192.168.1.2:3000',
+  'http://192.168.50.243:3000',
   'http://192.168.50.234:3000'
 ];
 
