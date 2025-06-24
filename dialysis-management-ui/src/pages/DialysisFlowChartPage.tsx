@@ -17,7 +17,7 @@ const DialysisFlowChartPage: React.FC<{ sidebarCollapsed: boolean; toggleSidebar
 
       <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
       <div className="main-container">
-        <div style={{ width: '100%', padding: '10px' }}>
+        <div style={{ width: '100%', padding: '10px',marginTop: '-20px' }}>
           <SectionHeading title="Dialysis Flow Chart" subtitle="Visualize and manage dialysis flow charts" />
         </div>
         <DialysisFlowChart />

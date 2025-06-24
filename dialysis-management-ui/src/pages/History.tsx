@@ -66,7 +66,7 @@ const History: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void }
       <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
         <div className="main-container">
-          <div style={{ width: '100%', padding: '10px' }}>
+          <div style={{ width: '100%', padding: '10px',marginTop: '-20px' }}>
             <SectionHeading title="History" subtitle="View and manage dialysis session history" />
           </div>
           <div className="history-header">
@@ -104,8 +104,8 @@ const History: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void }
               <div className="history-timeline-header">
                 <h3 className="history-timeline-title">Treatment History</h3>
               </div> */}
-          <div className='schedule-table-container' style={{ width: '100%', marginLeft: 0, marginRight: 0, paddingBottom: 0 }}>
-            <h3 className="mb-4">Treatment History</h3>
+          <div className='history-table-container' style={{ width: '100%', marginLeft: 0, marginRight: 0, paddingBottom: 0}}>
+            {/* <h3 className="mb-4 history-title" style={{ marginLeft: '20px' }}>Treatment History</h3> */}
 
             {loading ? (
               <div className="alert alert-info">

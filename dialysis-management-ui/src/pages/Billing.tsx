@@ -154,7 +154,7 @@ const Billing: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void }
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
         <div className="main-container">
 
-          <div style={{ width: '100%', padding: '10px' }}>
+          <div style={{ width: '100%', padding: '10px',marginTop: '-20px' }}>
             <SectionHeading title="Billing" subtitle="Manage and view patient billing records" />
           </div>
 

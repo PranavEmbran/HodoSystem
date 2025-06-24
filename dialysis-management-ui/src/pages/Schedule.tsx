@@ -145,7 +145,7 @@ const Schedule: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void 
       <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
         <div className="main-container" style={{ height: '100%' }}>
-          <div style={{ width: '100%', padding: '10px' }}>
+          <div style={{ width: '100%', padding: '10px',marginTop: '-20px' }}>
             <SectionHeading title="Schedule" subtitle="Manage and view dialysis appointments" />
           </div>
           <Row className="mb-4">

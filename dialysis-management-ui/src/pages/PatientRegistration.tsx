@@ -70,7 +70,7 @@ const PatientRegistration: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: 
         {/* <div className={`patient-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}> */}
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
         <div className="main-container">
-          <div style={{ width: '100%', padding: '10px',marginTop: '-10px' }}>
+          <div style={{ width: '100%', padding: '10px',marginTop: '-20px' }}>
             <SectionHeading title="Patient Registration" subtitle="Register new patients and manage patient details" />
           </div>
 
