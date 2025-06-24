@@ -91,161 +91,161 @@ const Schedule: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void 
 
   return (
     <>
-    <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
-    <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
-    <div className="main-container">
-      <div style={{ width: '100%' ,padding: '10px'}}>
-        <SectionHeading title="Schedule" subtitle="Manage and view dialysis appointments" />
-      </div>
-      <Row className="mb-4">
-        <Col>
-          <Card className="shadow-sm">
-            <Card.Body>
-              <h2 className="home-title mb-4">Schedule Dialysis Session</h2>
-              {success && (
-                <div className="alert alert-success">
-                  Session scheduled successfully!
-                </div>
-              )}
-              {error && (
-                <div className="alert alert-danger">
-                  {error}
-                </div>
-              )}
-              <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={handleSubmit}
-              >
-                {({ isSubmitting }) => (
-                  <Form>
-                    <Row>
-                      <Col md={6} className="mb-3">
-                        <div className="form-group">
-                          <label htmlFor="patientId" className="form-label">Patient</label>
-                          <Field as="select" id="patientId" name="patientId" className="form-select">
-                            <option value="">Select Patient</option>
-                            {patients.map(p => (
-                              <option key={p.id} value={p.id}>
-                                {p.name || `${p.firstName || ''} ${p.lastName || ''}`.trim()}
-                              </option>
-                            ))}
-                          </Field>
-                          <ErrorMessage name="patientId" component="div" className="text-danger" />
-                        </div>
-                      </Col>
-                      <Col md={6} className="mb-3">
-                        <div className="form-group">
-                          <label htmlFor="dialysisUnit" className="form-label">Dialysis Unit</label>
-                          <Field as="select" id="dialysisUnit" name="dialysisUnit" className="form-select">
-                            <option value="">Select Unit</option>
-                            {staff.units.map(unit => (
-                              <option key={unit} value={unit}>{unit}</option>
-                            ))}
-                          </Field>
-                          <ErrorMessage name="dialysisUnit" component="div" className="text-danger" />
-                        </div>
-                      </Col>
-                      <Col md={6} className="mb-3">
-                        <div className="form-group">
-                          <label htmlFor="technician" className="form-label">Technician</label>
-                          <Field as="select" id="technician" name="technician" className="form-select">
-                            <option value="">Select Technician</option>
-                            {staff.technicians.map(tech => (
-                              <option key={tech} value={tech}>{tech}</option>
-                            ))}
-                          </Field>
-                          <ErrorMessage name="technician" component="div" className="text-danger" />
-                        </div>
-                      </Col>
-                      <Col md={6} className="mb-3">
-                        <div className="form-group">
-                          <label htmlFor="admittingDoctor" className="form-label">Admitting Doctor</label>
-                          <Field as="select" id="admittingDoctor" name="admittingDoctor" className="form-select">
-                            <option value="">Select Doctor</option>
-                            {staff.doctors.map(doc => (
-                              <option key={doc} value={doc}>{doc}</option>
-                            ))}
-                          </Field>
-                          <ErrorMessage name="admittingDoctor" component="div" className="text-danger" />
-                        </div>
-                      </Col>
-                      <Col md={6} className="mb-3">
-                        <div className="form-group">
-                          <label htmlFor="date" className="form-label">Date</label>
-                          <Field type="date" id="date" name="date" className="form-control" />
-                          <ErrorMessage name="date" component="div" className="text-danger" />
-                        </div>
-                      </Col>
-                      <Col md={6} className="mb-3">
-                        <div className="form-group">
-                          <label htmlFor="time" className="form-label">Time</label>
-                          <Field type="time" id="time" name="time" className="form-control" />
-                          <ErrorMessage name="time" component="div" className="text-danger" />
-                        </div>
-                      </Col>
-                      <Col md={12} className="mb-3">
-                        <div className="form-group">
-                          <label htmlFor="remarks" className="form-label">Remarks</label>
-                          <Field as="textarea" id="remarks" name="remarks" className="form-control" rows={3} />
-                          <ErrorMessage name="remarks" component="div" className="text-danger" />
-                        </div>
-                      </Col>
-                      <Col md={12}>
-                        {/* <button type="submit" className="btn btn-primary" disabled={isSubmitting}> */}
-                        <button type="submit" className="btn-with-gradient" disabled={isSubmitting}>
-                          {isSubmitting ? 'Scheduling...' : 'Schedule Session'}
-                        </button>
-                      </Col>
-                    </Row>
-                  </Form>
-                )}
-              </Formik>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+      <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
+        <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
+        <div className="main-container" style={{ height: '100%' }}>
+          <div style={{ width: '100%', padding: '10px' }}>
+            <SectionHeading title="Schedule" subtitle="Manage and view dialysis appointments" />
+          </div>
+          <Row className="mb-4">
+            <Col>
+              <Card className="shadow-sm">
+                <Card.Body>
+                  <h2 className="home-title mb-4">Schedule Dialysis Session</h2>
+                  {success && (
+                    <div className="alert alert-success">
+                      Session scheduled successfully!
+                    </div>
+                  )}
+                  {error && (
+                    <div className="alert alert-danger">
+                      {error}
+                    </div>
+                  )}
+                  <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={handleSubmit}
+                  >
+                    {({ isSubmitting }) => (
+                      <Form>
+                        <Row>
+                          <Col md={6} className="mb-3">
+                            <div className="form-group">
+                              <label htmlFor="patientId" className="form-label">Patient</label>
+                              <Field as="select" id="patientId" name="patientId" className="form-select">
+                                <option value="">Select Patient</option>
+                                {patients.map(p => (
+                                  <option key={p.id} value={p.id}>
+                                    {p.name || `${p.firstName || ''} ${p.lastName || ''}`.trim()}
+                                  </option>
+                                ))}
+                              </Field>
+                              <ErrorMessage name="patientId" component="div" className="text-danger" />
+                            </div>
+                          </Col>
+                          <Col md={6} className="mb-3">
+                            <div className="form-group">
+                              <label htmlFor="dialysisUnit" className="form-label">Dialysis Unit</label>
+                              <Field as="select" id="dialysisUnit" name="dialysisUnit" className="form-select">
+                                <option value="">Select Unit</option>
+                                {staff.units.map(unit => (
+                                  <option key={unit} value={unit}>{unit}</option>
+                                ))}
+                              </Field>
+                              <ErrorMessage name="dialysisUnit" component="div" className="text-danger" />
+                            </div>
+                          </Col>
+                          <Col md={6} className="mb-3">
+                            <div className="form-group">
+                              <label htmlFor="technician" className="form-label">Technician</label>
+                              <Field as="select" id="technician" name="technician" className="form-select">
+                                <option value="">Select Technician</option>
+                                {staff.technicians.map(tech => (
+                                  <option key={tech} value={tech}>{tech}</option>
+                                ))}
+                              </Field>
+                              <ErrorMessage name="technician" component="div" className="text-danger" />
+                            </div>
+                          </Col>
+                          <Col md={6} className="mb-3">
+                            <div className="form-group">
+                              <label htmlFor="admittingDoctor" className="form-label">Admitting Doctor</label>
+                              <Field as="select" id="admittingDoctor" name="admittingDoctor" className="form-select">
+                                <option value="">Select Doctor</option>
+                                {staff.doctors.map(doc => (
+                                  <option key={doc} value={doc}>{doc}</option>
+                                ))}
+                              </Field>
+                              <ErrorMessage name="admittingDoctor" component="div" className="text-danger" />
+                            </div>
+                          </Col>
+                          <Col md={6} className="mb-3">
+                            <div className="form-group">
+                              <label htmlFor="date" className="form-label">Date</label>
+                              <Field type="date" id="date" name="date" className="form-control" />
+                              <ErrorMessage name="date" component="div" className="text-danger" />
+                            </div>
+                          </Col>
+                          <Col md={6} className="mb-3">
+                            <div className="form-group">
+                              <label htmlFor="time" className="form-label">Time</label>
+                              <Field type="time" id="time" name="time" className="form-control" />
+                              <ErrorMessage name="time" component="div" className="text-danger" />
+                            </div>
+                          </Col>
+                          <Col md={12} className="mb-3">
+                            <div className="form-group">
+                              <label htmlFor="remarks" className="form-label">Remarks</label>
+                              <Field as="textarea" id="remarks" name="remarks" className="form-control" rows={3} />
+                              <ErrorMessage name="remarks" component="div" className="text-danger" />
+                            </div>
+                          </Col>
+                          <Col md={12}>
+                            {/* <button type="submit" className="btn btn-primary" disabled={isSubmitting}> */}
+                            <button type="submit" className="btn-with-gradient" disabled={isSubmitting}>
+                              {isSubmitting ? 'Scheduling...' : 'Schedule Session'}
+                            </button>
+                          </Col>
+                        </Row>
+                      </Form>
+                    )}
+                  </Formik>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
 
-      <Row>
-        <Col>
-          <Card className="shadow-sm">
-            <Card.Body style={{ marginLeft: "10px", marginRight: "10px", paddingBottom: "0px" }}>
-              <h3 className="mb-4">Scheduled Sessions</h3>
-              <div className="table-responsive">
-                <table className="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Patient</th>
-                      <th>Date</th>
-                      <th>Time</th>
-                      <th>Unit</th>
-                      <th>Technician</th>
-                      <th>Doctor</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {schedules.map(schedule => (
-                      <tr key={schedule.id}>
-                        <td>{schedule.patientName}</td>
-                        <td>{schedule.date}</td>
-                        <td>{schedule.time}</td>
-                        <td>{schedule.dialysisUnit}</td>
-                        <td>{schedule.technician}</td>
-                        <td>{schedule.admittingDoctor}</td>
-                        <td>{schedule.status}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-      </div>
-    <Footer />
-    </Container>
+          <Row>
+            <Col>
+              <Card className="shadow-sm">
+                <Card.Body style={{ marginLeft: "10px", marginRight: "10px", paddingBottom: "0px" }}>
+                  <h3 className="mb-4">Scheduled Sessions</h3>
+                  <div className="table-responsive">
+                    <table className="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>Patient</th>
+                          <th>Date</th>
+                          <th>Time</th>
+                          <th>Unit</th>
+                          <th>Technician</th>
+                          <th>Doctor</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {schedules.map(schedule => (
+                          <tr key={schedule.id}>
+                            <td>{schedule.patientName}</td>
+                            <td>{schedule.date}</td>
+                            <td>{schedule.time}</td>
+                            <td>{schedule.dialysisUnit}</td>
+                            <td>{schedule.technician}</td>
+                            <td>{schedule.admittingDoctor}</td>
+                            <td>{schedule.status}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        </div>
+        <Footer />
+      </Container>
     </>
   );
 };

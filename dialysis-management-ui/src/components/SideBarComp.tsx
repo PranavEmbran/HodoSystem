@@ -13,8 +13,23 @@ const formattedDate = today.toLocaleDateString('en-GB').replace(/\//g, '/');
 
 
 const SideBar: React.FC<SideBarCompProps> = ({ collapsed = false }) => {
+    const sidebarWidth = collapsed ? '0px' : '250px'; // ADJUST SIDE BAR WIDTH HERE AND ADJUST THE MAIN CONTAINER WIDTH IN Home.css
+
     return (
-        <div className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
+        <div
+            className={`sidebar ${collapsed ? 'collapsed' : ''}`}
+            style={{
+                width: sidebarWidth,
+                transition: 'width 0.3s ease',
+                height: '100vh',
+                overflowY: 'auto',
+                flexShrink: 0,
+                // Set CSS variable so other components can use it
+                ['--sidebar-expanded-width' as any]: sidebarWidth,
+            }}
+        >
+
+            {/* <div className={`sidebar ${collapsed ? 'collapsed' : ''}`}> */}
             {!collapsed && (
                 <div className="sidebar-header-section">
                     <div className="sidebar-header-top-wrap">
@@ -23,7 +38,7 @@ const SideBar: React.FC<SideBarCompProps> = ({ collapsed = false }) => {
                             <img src="/profileimg.jpg" alt="Profile" className="sidebar-header-img" />
                         </div>
                         <div className="sidebar-header-text-wrap">
-                    <div className="sidebar-header-role-top">System Admin</div>
+                            <div className="sidebar-header-role-top">System Admin</div>
                             <div className="sidebar-header-hospital">HODO Hospital,<br />Kazhakkoottam</div>
                             <div className="sidebar-header-role2">System Admin</div>
                             <div className="sidebar-header-location">@Kottayam <span className="sidebar-header-date">{formattedDate}</span></div>
@@ -123,6 +138,7 @@ const SideBar: React.FC<SideBarCompProps> = ({ collapsed = false }) => {
 
                 </ul>
             </nav>
+            {/* </div> */}
         </div>
     );
 };

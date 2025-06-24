@@ -25,31 +25,35 @@ interface SidebarProps {
 const App: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const toggleSidebar = () => setSidebarCollapsed(prev => !prev);     
+  const toggleSidebar = () => setSidebarCollapsed(prev => !prev);
 
   return (
     <Router>
       {/* <div className="app"> */}
-        <TopNav searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-          <SideBarComp collapsed={sidebarCollapsed} />
-        {/* <div className="main-container"> */}
-          
-          {/* <div className="page-container border border-danger"> */}
-            <Routes>
-              <Route path="/dashboard" element={<Dashboard sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />} />
-              <Route path="/" element={<Dashboard sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />} />
-              <Route path="/registration" element={<PatientRegistration sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />} />
-              <Route path="/schedule" element={<Schedule sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />} />
-              <Route path="/process" element={<DialysisProcess sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />} />
-              <Route path="/billing" element={<Billing sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar}  />} />
-              <Route path="/history" element={<History sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar}  />} />
-              {/* <Route path="/start" element={<StartDialysis />} /> */}
-              <Route path="/dialysis-flow-chart" element={<DialysisFlowChartPage sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar}  />} />
-              <Route path="/haemodialysis-record-details" element={<HaemodialysisRecordDetailsPage sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar}  />} />
-            </Routes>
-          {/* </div> */}
-        {/* </div> */}
-        {/* <Footer /> */}
+      <TopNav searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      {/* <SideBarComp collapsed={sidebarCollapsed} /> */}
+      {/* <div className="main-container"> */}
+
+      {/* <div className="page-container border border-danger"> */}
+      <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>  {/* NEW LINE */}
+        <SideBarComp collapsed={sidebarCollapsed} />
+        <div style={{ flex: 1, padding: '10px', overflowY: 'auto' }}> {/* NEW LINE */}
+          <Routes>
+            <Route path="/dashboard" element={<Dashboard sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />} />
+            <Route path="/" element={<Dashboard sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />} />
+            <Route path="/registration" element={<PatientRegistration sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />} />
+            <Route path="/schedule" element={<Schedule sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />} />
+            <Route path="/process" element={<DialysisProcess sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />} />
+            <Route path="/billing" element={<Billing sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />} />
+            <Route path="/history" element={<History sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />} />
+            {/* <Route path="/start" element={<StartDialysis />} /> */}
+            <Route path="/dialysis-flow-chart" element={<DialysisFlowChartPage sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />} />
+            <Route path="/haemodialysis-record-details" element={<HaemodialysisRecordDetailsPage sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />} />
+          </Routes>
+        </div>
+      </div>
+      {/* </div> */}
+      {/* <Footer /> */}
       {/* </div> */}
     </Router>
   );

@@ -152,7 +152,8 @@ color: #ffffff;
   /* min-height: auto; */
   padding: 32px 0;
   border-top: 5px solid #0097a7;
-  height: calc(100vh - 64px);
+  /* height: calc(100vh - 64px); */
+  height: 100%;
   /* or whatever header/footer size you subtract */
   margin-left: var(--sidebar-width);
   transition: margin-left 0.3s;

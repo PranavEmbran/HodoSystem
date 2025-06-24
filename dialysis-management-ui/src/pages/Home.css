@@ -1,4 +1,33 @@
+:root {
+  --sidebar-expanded-width: 250px;
+  /* ADJUST MAIN CONTAINER WIDTH HERE AND ADJUST SIDE BAR WIDTH IN SideBarComp.tsx */
+  --sidebar-collapsed-width: 0px;
+}
+
 .home-container {
+  height: fit-content;
+  width: calc(100% - var(--sidebar-expanded-width));
+  left: var(--sidebar-expanded-width);
+  background-color: #d9e0e7;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50px;
+  left: var(--sidebar-expanded-width);
+  overflow-y: auto;
+  transition: all 0.3s ease;
+  padding: 2rem;
+}
+
+.home-container.collapsed {
+  left: var(--sidebar-collapsed-width);
+  width: calc(100% - var(--sidebar-collapsed-width));
+}
+
+
+
+/* .home-container {
   height:fit-content;
   width: calc(100% - 250px);
   background-color: #d9e0e7;
@@ -16,7 +45,7 @@
   left: 0px;
   width: 100%;
   transition: all 0.3s ease;
-}
+} */
 
 @media (max-width: 768px) {
   .home-container {
@@ -33,6 +62,7 @@
     grid-template-columns: 1fr;
   }
 }
+
 /* .main-container {
   height: calc(100vh - 64px);
   margin-left: 250px;
@@ -172,7 +202,7 @@
   align-items: center;
   justify-content: center; */
 
-  
+
   background-color: white;
   border: 1px solid #eeeeee;
   /* border-left: 5px solid #0d92ae; */
@@ -185,8 +215,7 @@
   border-radius: 4px;
   padding: 1.5rem;
   /* padding: 2rem; */
-  display: flex
-;
+  display: flex;
   align-items: center;
   gap: 1.5rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -239,4 +268,3 @@
 .table td {
   vertical-align: middle;
 }
-
