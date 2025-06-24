@@ -353,7 +353,7 @@ const DialysisProcess: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () =
                       </Col>
 
                       <Col md={6}>
-                        <Card className="mb-2">
+                        {/* <Card className="mb-2">
                           <Card.Body>
                             <h4 className="home-title">Lab Results</h4>
                             <Row>
@@ -411,7 +411,7 @@ const DialysisProcess: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () =
                               </Col>
                             </Row>
                           </Card.Body>
-                        </Card>
+                        </Card> */}
 
                         <Card className="mb-2">
                           <Card.Body>

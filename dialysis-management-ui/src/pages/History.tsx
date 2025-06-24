@@ -99,51 +99,56 @@ const History: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void }
             </div>
           </div>
 
-          <div className="history-content">
+          {/* <div className="history-content">
             <div className="history-timeline">
               <div className="history-timeline-header">
                 <h3 className="history-timeline-title">Treatment History</h3>
-              </div>
+              </div> */}
+          <div className='schedule-table-container' style={{ width: '100%', marginLeft: 0, marginRight: 0, paddingBottom: 0 }}>
+            <h3 className="mb-4">Treatment History</h3>
 
-              {loading ? (
-                <div className="alert alert-info">
-                  Loading history...
-                </div>
-              ) : history.length === 0 ? (
-                <div className="alert alert-info">
-                  No dialysis history found.
-                </div>
-              ) : (
-                <div className="table-responsive">
-                  <table className="table">
-                    <thead>
-                      <tr>
-                        <th>Date</th>
-                        <th>Patient</th>
-                        <th>Parameters</th>
-                        <th>Notes</th>
-                        <th>Amount</th>
+            {loading ? (
+              <div className="alert alert-info">
+                Loading history...
+              </div>
+            ) : history.length === 0 ? (
+              <div className="alert alert-info">
+                No dialysis history found.
+              </div>
+            ) : (
+              // <div className="table-responsive">
+              //   <table className="table">
+              <div className="table-container" style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+              <table className="vehicles-table">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Patient</th>
+                      <th>Parameters</th>
+                      <th>Notes</th>
+                      <th>Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {history.map((h, i) => (
+                      <tr key={h.id || i}>
+                        <td>{h.date}</td>
+                        <td>{h.patientName}</td>
+                        <td>{h.parameters || h.treatmentParameters?.dialyzer || '-'}</td>
+                        <td>{h.notes || h.nursingNotes || '-'}</td>
+                        <td>{h.amount || '-'}</td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {history.map((h, i) => (
-                        <tr key={h.id || i}>
-                          <td>{h.date}</td>
-                          <td>{h.patientName}</td>
-                          <td>{h.parameters || h.treatmentParameters?.dialyzer || '-'}</td>
-                          <td>{h.notes || h.nursingNotes || '-'}</td>
-                          <td>{h.amount || '-'}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
-            </div>
+                    ))}
+                  </tbody>
+                </table>
+                
+              </div>
+            )}
           </div>
         </div>
-        <Footer />
-      </Container>
+      {/* </div> */}
+      <Footer />
+    </Container >
     </>
   );
 };

@@ -44,6 +44,20 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
   // Auto-refresh timer
   const [refreshTimer, setRefreshTimer] = useState<NodeJS.Timeout | null>(null);
 
+  // Pagination state
+  const [patientsPage, setPatientsPage] = useState<number>(1);
+  const [appointmentsPage, setAppointmentsPage] = useState<number>(1);
+  const [patientsRowsPerPage, setPatientsRowsPerPage] = useState<number>(10);
+  const [appointmentsRowsPerPage, setAppointmentsRowsPerPage] = useState<number>(10);
+
+  // Reset page when filters or rows per page change
+  useEffect(() => {
+    setPatientsPage(1);
+  }, [fromDate, toDate, status, opIp, showAll, search, patients.length, patientsRowsPerPage]);
+  useEffect(() => {
+    setAppointmentsPage(1);
+  }, [fromDate, toDate, status, opIp, showAll, search, appointments.length, appointmentsRowsPerPage]);
+
   // Load data on component mount
   useEffect(() => {
     loadData();
@@ -217,6 +231,59 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
   const stats = getDashboardStats();
   const filteredData = getFilteredData();
 
+  // Pagination logic
+  const patientsTotalPages = Math.ceil(filteredData.patients.length / patientsRowsPerPage);
+  const appointmentsTotalPages = Math.ceil(filteredData.appointments.length / appointmentsRowsPerPage);
+  const paginatedPatients = filteredData.patients.slice((patientsPage - 1) * patientsRowsPerPage, patientsPage * patientsRowsPerPage);
+  const paginatedAppointments = filteredData.appointments.slice((appointmentsPage - 1) * appointmentsRowsPerPage, appointmentsPage * appointmentsRowsPerPage);
+
+  const renderPagination = (currentPage: number, totalPages: number, setPage: (page: number) => void, rowsPerPage: number, setRowsPerPage: (n: number) => void) => {
+    // Show a window of 5 page numbers
+    const pageWindow = 2;
+    let start = Math.max(1, currentPage - pageWindow);
+    let end = Math.min(totalPages, currentPage + pageWindow);
+    if (end - start < 4) {
+      if (start === 1) end = Math.min(totalPages, start + 4);
+      if (end === totalPages) start = Math.max(1, end - 4);
+    }
+    const pageNumbers = [];
+    for (let i = start; i <= end; i++) pageNumbers.push(i);
+
+    return (
+      <div className="pagination-container">
+        <div className="pagination-info">
+          Rows per page:
+          <select
+            value={rowsPerPage}
+            onChange={e => setRowsPerPage(Number(e.target.value))}
+            style={{ margin: '0 8px', padding: '2px 8px', borderRadius: 4 }}
+          >
+            {[5, 10, 20, 50].map(n => <option key={n} value={n}>{n}</option>)}
+          </select>
+          Page {currentPage} of {totalPages}
+        </div>
+        <div className="pagination-controls">
+          <button className="pagination-btn" onClick={() => setPage(1)} disabled={currentPage === 1}>&#171; First</button>
+          <button className="pagination-btn" onClick={() => setPage(currentPage - 1)} disabled={currentPage === 1}>&#8249; Prev</button>
+          <div className="page-numbers">
+            {pageNumbers.map(page => (
+              <button
+                key={page}
+                className={`page-number${page === currentPage ? ' active' : ''}`}
+                onClick={() => setPage(page)}
+                disabled={page === currentPage}
+              >
+                {page}
+              </button>
+            ))}
+          </div>
+          <button className="pagination-btn" onClick={() => setPage(currentPage + 1)} disabled={currentPage === totalPages}>Next &#8250;</button>
+          <button className="pagination-btn" onClick={() => setPage(totalPages)} disabled={currentPage === totalPages}>Last &#187;</button>
+        </div>
+      </div>
+    );
+  };
+
   if (loading) {
     return (
       <>
@@ -255,7 +322,7 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
         <div className="main-container">
 
-          <div style={{ width: '100%', padding: '10px' }}>
+          <div style={{ width: '100%', padding: '10px',marginTop: '-10px'  }}>
             <SectionHeading title="Dashboard" subtitle="Overview and quick stats for dialysis management" />
           </div>
           <Row className="mb-4">
@@ -271,7 +338,7 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
             ))}
           </Row>
 
-          <Row className="mb-3 align-items-end g-3">
+          {/* <Row className="mb-3 align-items-end g-3">
             <Col xs={12} md={2}>
               <Form.Label>From Date</Form.Label>
               <Form.Control
@@ -362,13 +429,13 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
                 Reset
               </Button>
             </Col>
-          </Row>
-          {/* <Row> */}
-          {/* <Col> */}
-          <div className="table-responsive">
+          </Row> */}
+
+        
+          <div className="table-container" style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
             <div className='dashboard-table-heading'>Registered Patients: {filteredData.patients.length}</div>
-            <table className="table table-striped table-hover align-middle">
-              <thead className="table-light">
+            <table className="vehicles-table">
+              <thead>
                 <tr>
                   <th>Name</th>
                   <th>Gender</th>
@@ -379,8 +446,8 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
                 </tr>
               </thead>
               <tbody>
-                {filteredData.patients.length > 0 ? (
-                  filteredData.patients.map(p => {
+                {paginatedPatients.length > 0 ? (
+                  paginatedPatients.map(p => {
                     // Find last visit date
                     const lastVisit = history
                       .filter(h => h.patientId === p.id)
@@ -406,15 +473,16 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
                 )}
               </tbody>
             </table>
+            {patientsTotalPages > 1 && renderPagination(patientsPage, patientsTotalPages, setPatientsPage, patientsRowsPerPage, setPatientsRowsPerPage)}
           </div>
           {/* </Col> */}
           {/* </Row> */}
           {/* <Row> */}
           {/* <Col> */}
-          <div className="table-responsive">
+          <div className="table-container" style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
             <div className='dashboard-table-heading'>Recent Appointments: {filteredData.appointments.length}</div>
-            <table className="table table-striped table-hover align-middle">
-              <thead className="table-light">
+            <table className="vehicles-table">
+              <thead>
                 <tr>
                   <th></th>
                   <th>Patient Name</th>
@@ -427,8 +495,8 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
                 </tr>
               </thead>
               <tbody>
-                {filteredData.appointments.length > 0 ? (
-                  filteredData.appointments.map(apt => (
+                {paginatedAppointments.length > 0 ? (
+                  paginatedAppointments.map(apt => (
                     <tr key={apt.id}>
                       <td><Button size="sm" variant="outline-primary">+</Button></td>
                       <td>{apt.patientName}</td>
@@ -455,6 +523,7 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
                 )}
               </tbody>
             </table>
+            {appointmentsTotalPages > 1 && renderPagination(appointmentsPage, appointmentsTotalPages, setAppointmentsPage, appointmentsRowsPerPage, setAppointmentsRowsPerPage)}
           </div>
           {/* </Col> */}
           {/* </Row> */}

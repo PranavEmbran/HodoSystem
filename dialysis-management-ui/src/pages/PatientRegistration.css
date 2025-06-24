@@ -42,19 +42,54 @@
   display: flex;
   align-items: flex-start;
   gap: 2rem;
+  width: 100%;
+}
+
+.patient-image-container {
+  width: 350px;
+  min-width: 250px;
+  max-width: 400px;
+  flex-shrink: 0;
+  /* border: 1px solid blue !important; */
+  display: flex;
+  margin-left: 10px;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .patient-image {
-  width: 391px;
-  height: 603px;
-  object-fit: cover;
+  width: 100%;
+  height: auto;
+  max-width: 350px;
+  max-height: 400px;
+  object-fit: contain;
   border-radius: 8px;
-  /* box-shadow: 0 2px 8px rgba(0,0,0,0.08); */
-  margin-right: 1.5rem;
+  margin-right: 0;
 }
 
 .patient-registration-content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.patient-form {
+  width: 100%;
+  /* border: 1px solid red; */
+  margin-left: -25px;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 1.5rem;
+  margin-right: 10px;
+  background: #fff;
+}
+
+.patient-registration-form {
+  width: 100%;
+  margin: 0 auto;
 }
 
 .patient-container.collapsed {
@@ -89,11 +124,6 @@
   text-align: center;
 }
 
-.patient-registration-form {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
 .form-group {
   margin-bottom: 1.5rem;
 }
@@ -106,10 +136,10 @@
 
 .form-control {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.25rem !important;
   border: 1px solid #ced4da;
   border-radius: 4px;
-  font-size: 1rem;
+  font-size: 14px !important;
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
@@ -121,10 +151,10 @@
 
 .form-select {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.25rem !important;
   border: 1px solid #ced4da;
   border-radius: 4px;
-  font-size: 1rem;
+  font-size: 14px !important;
   transition: border-color 0.3s, box-shadow 0.3s;
   background-color: #ffffff;
 }
@@ -196,18 +226,19 @@
   opacity: 1;
 }
 
-@media (max-width: 768px) {
-  .patient-registration-container {
-    width: 100%-280px;
-    left: 0;
-    padding: 1rem;
+@media (max-width: 900px) {
+  .patient-registration-flex {
+    flex-direction: column;
+    align-items: stretch;
   }
-
-  .patient-registration-card {
-    padding: 1rem;
+  .patient-image-container {
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+    margin-bottom: 1rem;
   }
-
-  .patient-registration-form {
-    padding: 0;
+  .patient-image {
+    max-width: 100%;
+    height: auto;
   }
 }

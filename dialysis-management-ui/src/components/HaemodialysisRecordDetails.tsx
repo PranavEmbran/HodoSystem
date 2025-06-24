@@ -174,7 +174,7 @@ const HaemodialysisRecordDetails: React.FC = () => {
               ))}
             </tbody>
           </table>
-        </div>
+        </div>  
         <div className="form-actions">
           <button onClick={handleAddRow} className="btn-add-row btn-with-gradient">Add Row</button>
           <div className="action-buttons">

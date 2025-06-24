@@ -148,12 +148,11 @@ color: #ffffff;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  min-height: 155vh;
+  min-height: fit-content;
   /* min-height: auto; */
   padding: 32px 0;
   border-top: 5px solid #0097a7;
-  /* height: calc(100vh - 64px); */
-  height: 100%;
+  height: calc(100vh - 64px);
   /* or whatever header/footer size you subtract */
   margin-left: var(--sidebar-width);
   transition: margin-left 0.3s;

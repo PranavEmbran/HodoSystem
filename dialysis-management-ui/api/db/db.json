@@ -390,6 +390,36 @@
       "fistulaDate": "2025-06-23",
       "phone": "9876543215",
       "id": "20250623/009"
+    },
+    {
+      "firstName": "Vijaya",
+      "lastName": "Raghavan",
+      "gender": "Male",
+      "dateOfBirth": "1980-05-05",
+      "mobileNo": "9876543215",
+      "bloodGroup": "AB+",
+      "catheterInsertionDate": "2025-06-24",
+      "fistulaCreationDate": "2025-06-24",
+      "name": "Vijaya Raghavan",
+      "catheterDate": "2025-06-24",
+      "fistulaDate": "2025-06-24",
+      "phone": "9876543215",
+      "id": "20250624/001"
+    },
+    {
+      "firstName": "biju",
+      "lastName": "b",
+      "gender": "Female",
+      "dateOfBirth": "2025-06-01",
+      "mobileNo": "1234567890",
+      "bloodGroup": "A+",
+      "catheterInsertionDate": "2025-06-01",
+      "fistulaCreationDate": "2025-07-01",
+      "name": "biju b",
+      "catheterDate": "2025-06-01",
+      "fistulaDate": "2025-07-01",
+      "phone": "1234567890",
+      "id": "20250601/001"
     }
   ],
   "appointments": [
@@ -513,6 +543,28 @@
       "remarks": "iu",
       "patientName": "Ashwin Shankar",
       "id": "1750319735542"
+    },
+    {
+      "patientId": "20250624/001",
+      "dialysisUnit": "Unit D",
+      "technician": "Dr. Davis",
+      "admittingDoctor": "Dr. Garcia",
+      "date": "2025-06-24",
+      "time": "09:43",
+      "remarks": "TEST",
+      "patientName": "Vijaya Raghavan",
+      "id": "1750738432445"
+    },
+    {
+      "patientId": "20250601/001",
+      "dialysisUnit": "Unit C",
+      "technician": "Dr. Davis",
+      "admittingDoctor": "Dr. Davis",
+      "date": "2025-06-23",
+      "time": "18:59",
+      "remarks": "ippo ded",
+      "patientName": "biju b",
+      "id": "1750740989694"
     }
   ],
   "billing": [
@@ -565,6 +617,72 @@
       "patientName": "Salahudeen I",
       "totalAmount": 500,
       "status": "PAID"
+    },
+    {
+      "patientId": "20250612/001",
+      "sessionDate": "2025-06-24",
+      "sessionDuration": 120,
+      "amount": 500,
+      "patientName": "Yas K",
+      "totalAmount": 500,
+      "status": "PAID",
+      "date": "2025-06-24",
+      "id": "1750757137094"
+    },
+    {
+      "patientId": "20250623/005",
+      "sessionDate": "2025-06-24",
+      "sessionDuration": 180,
+      "amount": 800,
+      "patientName": "Kichu C",
+      "totalAmount": 800,
+      "status": "PAID",
+      "date": "2025-06-24",
+      "id": "1750757151538"
+    },
+    {
+      "patientId": "20250617/001",
+      "sessionDate": "2025-06-24",
+      "sessionDuration": 90,
+      "amount": 900,
+      "patientName": "Athira NK",
+      "totalAmount": 900,
+      "status": "PAID",
+      "date": "2025-06-24",
+      "id": "1750757169185"
+    },
+    {
+      "patientId": "20250623/001",
+      "sessionDate": "2025-06-24",
+      "sessionDuration": 90,
+      "amount": 1000,
+      "patientName": "Sivadassan N",
+      "totalAmount": 1000,
+      "status": "PAID",
+      "date": "2025-06-24",
+      "id": "1750757183172"
+    },
+    {
+      "patientId": "20250623/002",
+      "sessionDate": "2025-06-24",
+      "sessionDuration": 90,
+      "amount": 1500,
+      "patientName": "Hema SD",
+      "totalAmount": 1500,
+      "status": "PAID",
+      "date": "2025-06-24",
+      "id": "1750757199975"
+    },
+    {
+      "patientId": "20250613/002",
+      "sessionDate": "2025-06-24",
+      "sessionDuration": 90,
+      "amount": 900,
+      "patientName": "Nithin R",
+      "totalAmount": 900,
+      "status": "PAID",
+      "date": "2025-06-24",
+      "id": "1750757218127"
     }
   ],
   "history": [
@@ -812,6 +930,41 @@
       "patientName": "Vignesh Sharma",
       "date": "2025-06-19",
       "id": "1750319779117"
+    },
+    {
+      "patientId": "20250624/001",
+      "startTime": "09:50",
+      "endTime": "12:50",
+      "vitalSigns": {
+        "preDialysis": {
+          "bloodPressure": "120",
+          "heartRate": 72,
+          "temperature": 37,
+          "weight": 55
+        },
+        "postDialysis": {
+          "bloodPressure": "120",
+          "heartRate": 72,
+          "temperature": 37,
+          "weight": 55
+        }
+      },
+      "labResults": {
+        "urea": 64,
+        "creatinine": 87,
+        "potassium": 11.8,
+        "sodium": 45
+      },
+      "treatmentParameters": {
+        "dialyzer": "78",
+        "bloodFlow": 65,
+        "dialysateFlow": 12,
+        "ultrafiltration": 45
+      },
+      "nursingNotes": "TEST#",
+      "patientName": "Vijaya Raghavan",
+      "date": "2025-06-24",
+      "id": "1750738510794"
     }
   ],
   "dialysisFlowCharts": [

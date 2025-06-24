@@ -27,7 +27,7 @@ const validationSchema = Yup.object({
 });
 
 // const Billing: React.FC = () => {
-  const Billing: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void }> = ({ sidebarCollapsed, toggleSidebar }) => {
+const Billing: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void }> = ({ sidebarCollapsed, toggleSidebar }) => {
 
   const [patients, setPatients] = useState<Patient[]>([]);
   const [bills, setBills] = useState<BillingType[]>([]);
@@ -37,6 +37,12 @@ const validationSchema = Yup.object({
   const [error, setError] = useState<string>('');
   // const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   // const toggleSidebar = () => setSidebarCollapsed((prev) => !prev);
+
+  // Pagination state for bills
+  const [billsPage, setBillsPage] = useState(1);
+  const [billsRowsPerPage, setBillsRowsPerPage] = useState(10);
+  const billsTotalPages = Math.ceil(bills.length / billsRowsPerPage);
+  const paginatedBills = bills.slice((billsPage - 1) * billsRowsPerPage, billsPage * billsRowsPerPage);
 
   useEffect(() => {
     patientsApi.getAllPatients().then(setPatients).catch(() => setError('Failed to fetch patients'));
@@ -96,6 +102,51 @@ const validationSchema = Yup.object({
     html2pdf().set(opt).from(element).save();
   };
 
+  const renderPagination = (currentPage: number, totalPages: number, setPage: (page: number) => void, rowsPerPage: number, setRowsPerPage: (n: number) => void) => {
+    const pageWindow = 2;
+    let start = Math.max(1, currentPage - pageWindow);
+    let end = Math.min(totalPages, currentPage + pageWindow);
+    if (end - start < 4) {
+      if (start === 1) end = Math.min(totalPages, start + 4);
+      if (end === totalPages) start = Math.max(1, end - 4);
+    }
+    const pageNumbers = [];
+    for (let i = start; i <= end; i++) pageNumbers.push(i);
+    return (
+      <div className="pagination-container">
+        <div className="pagination-info">
+          Rows per page:
+          <select
+            value={rowsPerPage}
+            onChange={e => { setRowsPerPage(Number(e.target.value)); setPage(1); }}
+            style={{ margin: '0 8px', padding: '2px 8px', borderRadius: 4 }}
+          >
+            {[5, 10, 20, 50].map(n => <option key={n} value={n}>{n}</option>)}
+          </select>
+          Page {currentPage} of {totalPages}
+        </div>
+        <div className="pagination-controls">
+          <button className="pagination-btn" onClick={() => setPage(1)} disabled={currentPage === 1}>&#171; First</button>
+          <button className="pagination-btn" onClick={() => setPage(currentPage - 1)} disabled={currentPage === 1}>&#8249; Prev</button>
+          <div className="page-numbers">
+            {pageNumbers.map(page => (
+              <button
+                key={page}
+                className={`page-number${page === currentPage ? ' active' : ''}`}
+                onClick={() => setPage(page)}
+                disabled={page === currentPage}
+              >
+                {page}
+              </button>
+            ))}
+          </div>
+          <button className="pagination-btn" onClick={() => setPage(currentPage + 1)} disabled={currentPage === totalPages}>Next &#8250;</button>
+          <button className="pagination-btn" onClick={() => setPage(totalPages)} disabled={currentPage === totalPages}>Last &#187;</button>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
       {/* <Container fluid className={`billing-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}> */}
@@ -103,166 +154,176 @@ const validationSchema = Yup.object({
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
         <div className="main-container">
 
-              <div style={{ width: '100%' ,padding: '10px'}}>
-                <SectionHeading title="Billing" subtitle="Manage and view patient billing records" />
-              </div>
+          <div style={{ width: '100%', padding: '10px' }}>
+            <SectionHeading title="Billing" subtitle="Manage and view patient billing records" />
+          </div>
 
 
-        <Row className="mb-4">
-          <Col>
-            <Card className="shadow-sm">
+          <Row className="mb-4">
+            <Col>
+              <Card className="shadow-sm">
                 <Card.Body>
-                {success && (
-                  <div className="alert alert-success">
-                    Bill added successfully!
-                  </div>
-                )}
-
-                {error && (
-                  <div className="alert alert-danger">
-                    {error}
-                  </div>
-                )}
-
-                <Formik
-                  initialValues={initialValues}
-                  validationSchema={validationSchema}
-                  onSubmit={handleSubmit}
-                >
-                  {({ isSubmitting }) => (
-                    <Form>
-                      <Row>
-                        <Col md={6} className="mb-3">
-                          <div className="form-group">
-                            <label htmlFor="patientId" className="form-label">Patient</label>
-                            <Field as="select" id="patientId" name="patientId" className="form-select">
-                              <option value="">Select</option>
-                              {patients.map(p => <option key={p.id} value={p.id}>{(p.firstName || p.name) + (p.lastName ? ' ' + p.lastName : '')}</option>)}
-                            </Field>
-                            <ErrorMessage name="patientId" component="div" className="text-danger" />
-                          </div>
-                        </Col>
-                        <Col md={6} className="mb-3">
-                          <div className="form-group">
-                            <label htmlFor="sessionDate" className="form-label">Session Date</label>
-                            <Field type="date" id="sessionDate" name="sessionDate" className="form-control" />
-                            <ErrorMessage name="sessionDate" component="div" className="text-danger" />
-                          </div>
-                        </Col>
-                        <Col md={6} className="mb-3">
-                          <div className="form-group">
-                            <label htmlFor="sessionDuration" className="form-label">Session Duration (min)</label>
-                            <Field type="number" id="sessionDuration" name="sessionDuration" className="form-control" />
-                            <ErrorMessage name="sessionDuration" component="div" className="text-danger" />
-                          </div>
-                        </Col>
-                        <Col md={6} className="mb-3">
-                          <div className="form-group">
-                            <label htmlFor="amount" className="form-label">Amount</label>
-                            <Field type="number" id="amount" name="amount" className="form-control" />
-                            <ErrorMessage name="amount" component="div" className="text-danger" />
-                          </div>
-                        </Col>
-                      </Row>
-                      {/*<Button type="submit" variant="primary" disabled={isSubmitting} className="btn-with-gradient">*/}
-                      <Button type="submit" disabled={isSubmitting} className="btn-with-gradient">
-                        {isSubmitting ? 'Adding...' : 'Add Bill'}
-                      </Button>
-                    </Form>
+                  {success && (
+                    <div className="alert alert-success">
+                      Bill added successfully!
+                    </div>
                   )}
-                </Formik>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
 
-        <Row className="mt-4">
+                  {error && (
+                    <div className="alert alert-danger">
+                      {error}
+                    </div>
+                  )}
+
+                  <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={handleSubmit}
+                  >
+                    {({ isSubmitting }) => (
+                      <Form>
+                        <Row>
+                          <Col md={6} className="mb-3">
+                            <div className="form-group">
+                              <label htmlFor="patientId" className="form-label">Patient</label>
+                              <Field as="select" id="patientId" name="patientId" className="form-select">
+                                <option value="">Select</option>
+                                {patients.map(p => <option key={p.id} value={p.id}>{(p.firstName || p.name) + (p.lastName ? ' ' + p.lastName : '')}</option>)}
+                              </Field>
+                              <ErrorMessage name="patientId" component="div" className="text-danger" />
+                            </div>
+                          </Col>
+                          <Col md={6} className="mb-3">
+                            <div className="form-group">
+                              <label htmlFor="sessionDate" className="form-label">Session Date</label>
+                              <Field type="date" id="sessionDate" name="sessionDate" className="form-control" />
+                              <ErrorMessage name="sessionDate" component="div" className="text-danger" />
+                            </div>
+                          </Col>
+                          <Col md={6} className="mb-3">
+                            <div className="form-group">
+                              <label htmlFor="sessionDuration" className="form-label">Session Duration (min)</label>
+                              <Field type="number" id="sessionDuration" name="sessionDuration" className="form-control" />
+                              <ErrorMessage name="sessionDuration" component="div" className="text-danger" />
+                            </div>
+                          </Col>
+                          <Col md={6} className="mb-3">
+                            <div className="form-group">
+                              <label htmlFor="amount" className="form-label">Amount</label>
+                              <Field type="number" id="amount" name="amount" className="form-control" />
+                              <ErrorMessage name="amount" component="div" className="text-danger" />
+                            </div>
+                          </Col>
+                        </Row>
+                        {/*<Button type="submit" variant="primary" disabled={isSubmitting} className="btn-with-gradient">*/}
+                        <Button type="submit" disabled={isSubmitting} className="btn-with-gradient">
+                          {isSubmitting ? 'Adding...' : 'Add Bill'}
+                        </Button>
+                      </Form>
+                    )}
+                  </Formik>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+
+          {/* <Row className="mt-4">
           <Col>
             <Card className="shadow-sm"  >
-              <Card.Body style={{ marginLeft: "10px", marginRight: "10px", paddingBottom: "0px" }}>
-                <h3 className="home-title mb-4">Recent Bills</h3>
-                <div className="table-responsive">
-                  <table className="table table-striped table-hover align-middle">
-                    <thead className="table-light">
-                      <tr>
-                        <th>Patient</th>
-                        <th>Date</th>
-                        <th>Duration</th>
-                        <th>Amount</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {bills.map(b => (
-                        <tr key={b.id}>
-                          <td>{b.patientName}</td>
-                          <td>{b.sessionDate}</td>
-                          <td>{b.sessionDuration} minutes</td>
-                          <td>₹{b.totalAmount}</td>
-                          <td>
-                            <span className={`badge bg-${b.status === 'PAID' ? 'success' : 'warning'}`}>
-                              {b.status}
-                            </span>
-                          </td>
-                          <td>
-                            <Button
-                              variant="outline-primary"
-                              size="sm"
-                              onClick={() => {
-                                setSelectedBill(b);
-                                setShowPrintModal(true);
-                              }}
-                            >
-                              View Bill
-                            </Button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </Card.Body>
+              <Card.Body style={{ marginLeft: "10px", marginRight: "10px", paddingBottom: "0px" }}> */}
+          {/* <h3 className="home-title mb-4">Recent Bills</h3> */}
+          <div className="table-container" style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+            <div className='dashboard-table-heading'>Recent Bills: {bills.length}</div>
+            <table className="vehicles-table">
+              <thead>
+                <tr>
+                  <th>Patient</th>
+                  <th>Date</th>
+                  <th>Duration</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {paginatedBills.length > 0 ? (
+                  paginatedBills.map(b => (
+                    <tr key={b.id}>
+                      <td>{b.patientName}</td>
+                      <td>{b.sessionDate}</td>
+                      <td>{b.sessionDuration} minutes</td>
+                      <td>₹{b.totalAmount}</td>
+                      <td>
+                        <span className={`badge bg-${b.status === 'PAID' ? 'success' : 'warning'}`}>
+                          {b.status}
+                        </span>
+                      </td>
+                      <td>
+                        <Button
+                          variant="outline-primary"
+                          size="sm"
+                          onClick={() => {
+                            setSelectedBill(b);
+                            setShowPrintModal(true);
+                          }}
+                        >
+                          View Bill
+                        </Button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={6} className="text-center text-muted">
+                      No bills found.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+            {billsTotalPages > 1 && renderPagination(billsPage, billsTotalPages, setBillsPage, billsRowsPerPage, setBillsRowsPerPage)}
+          </div>
+          {/* </Card.Body>
             </Card>
           </Col>
-        </Row>
+        </Row> */}
 
-        {showPrintModal && selectedBill && (
-          <div className="modal fade show" style={{ display: 'block' }} tabIndex={-1}>
-            <div className="modal-dialog modal-lg">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title">Bill Details</h5>
-                  <button type="button" className="btn-close" onClick={() => setShowPrintModal(false)}></button>
-                </div>
-                <div className="modal-body" id="print-bill">
-                  <div className="bill-header">
-                    <h3>Dialysis Center</h3>
-                    <p>Bill Receipt</p>
+          {showPrintModal && selectedBill && (
+            <div className="modal fade show" style={{ display: 'block' }} tabIndex={-1}>
+              <div className="modal-dialog modal-lg">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title">Bill Details</h5>
+                    <button type="button" className="btn-close" onClick={() => setShowPrintModal(false)}></button>
                   </div>
-                  <div className="bill-details">
-                    <p><strong>Patient:</strong> {selectedBill.patientName}</p>
-                    <p><strong>Date:</strong> {selectedBill.sessionDate}</p>
-                    <p><strong>Duration:</strong> {selectedBill.sessionDuration} minutes</p>
-                    <p><strong>Amount:</strong> ₹{selectedBill.totalAmount}</p>
-                    <p><strong>Status:</strong> {selectedBill.status}</p>
+                  <div className="modal-body" id="print-bill">
+                    <div className="bill-header">
+                      <h3>Dialysis Center</h3>
+                      <p>Bill Receipt</p>
+                    </div>
+                    <div className="bill-details">
+                      <p><strong>Patient:</strong> {selectedBill.patientName}</p>
+                      <p><strong>Date:</strong> {selectedBill.sessionDate}</p>
+                      <p><strong>Duration:</strong> {selectedBill.sessionDuration} minutes</p>
+                      <p><strong>Amount:</strong> ₹{selectedBill.totalAmount}</p>
+                      <p><strong>Status:</strong> {selectedBill.status}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="modal-footer">
-                  <Button variant="secondary" onClick={() => setShowPrintModal(false)}>
-                    Close
-                  </Button>
-                  <Button variant="primary" onClick={handlePrint}>
-                    Print
-                  </Button>
-                  <Button variant="success" onClick={handleDownloadPDF}>
-                    Download PDF
-                  </Button>
+                  <div className="modal-footer">
+                    <Button variant="secondary" onClick={() => setShowPrintModal(false)}>
+                      Close
+                    </Button>
+                    <Button variant="primary" onClick={handlePrint}>
+                      Print
+                    </Button>
+                    <Button variant="success" onClick={handleDownloadPDF}>
+                      Download PDF
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
         </div>
         <Footer />
       </Container>

@@ -70,15 +70,16 @@ const PatientRegistration: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: 
         {/* <div className={`patient-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}> */}
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
         <div className="main-container">
-          <div style={{ width: '100%', padding: '10px' }}>
+          <div style={{ width: '100%', padding: '10px',marginTop: '-10px' }}>
             <SectionHeading title="Patient Registration" subtitle="Register new patients and manage patient details" />
           </div>
 
 
 
           <div className="patient-registration-flex">
-
-            <img src="/patient1.png" alt="Patient" className="patient-image" />
+            <div className="patient-image-container">
+              <img src="/patient1.png" alt="Patient" className="patient-image" />
+            </div>
             <div className="patient-registration-content">
 
               {success && (
@@ -108,6 +109,7 @@ const PatientRegistration: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: 
                 onSubmit={handleSubmit}
               >
                 {({ isSubmitting }) => (
+                  <div className="patient-form">
                   <Form className="patient-registration-form">
                     <div className="row">
                       <div className="col-md-6">
@@ -233,8 +235,9 @@ const PatientRegistration: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: 
                       </button>
                     </div>
                   </Form>
-                )}
-              </Formik>
+                  </div>
+                  )}
+                </Formik>
             </div>
           </div>
         </div>

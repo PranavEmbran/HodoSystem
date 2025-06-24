@@ -39,6 +39,12 @@ const Schedule: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void 
   // const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   // const toggleSidebar = () => setSidebarCollapsed((prev) => !prev);
 
+  // Pagination state for schedules
+  const [schedulesPage, setSchedulesPage] = useState(1);
+  const [schedulesRowsPerPage, setSchedulesRowsPerPage] = useState(10);
+  const schedulesTotalPages = Math.ceil(schedules.length / schedulesRowsPerPage);
+  const paginatedSchedules = schedules.slice((schedulesPage - 1) * schedulesRowsPerPage, schedulesPage * schedulesRowsPerPage);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -87,6 +93,51 @@ const Schedule: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void 
     } catch {
       setError('Failed to add schedule');
     }
+  };
+
+  const renderPagination = (currentPage: number, totalPages: number, setPage: (page: number) => void, rowsPerPage: number, setRowsPerPage: (n: number) => void) => {
+    const pageWindow = 2;
+    let start = Math.max(1, currentPage - pageWindow);
+    let end = Math.min(totalPages, currentPage + pageWindow);
+    if (end - start < 4) {
+      if (start === 1) end = Math.min(totalPages, start + 4);
+      if (end === totalPages) start = Math.max(1, end - 4);
+    }
+    const pageNumbers = [];
+    for (let i = start; i <= end; i++) pageNumbers.push(i);
+    return (
+      <div className="pagination-container">
+        <div className="pagination-info">
+          Rows per page:
+          <select
+            value={rowsPerPage}
+            onChange={e => { setRowsPerPage(Number(e.target.value)); setPage(1); }}
+            style={{ margin: '0 8px', padding: '2px 8px', borderRadius: 4 }}
+          >
+            {[5, 10, 20, 50].map(n => <option key={n} value={n}>{n}</option>)}
+          </select>
+          Page {currentPage} of {totalPages}
+        </div>
+        <div className="pagination-controls">
+          <button className="pagination-btn" onClick={() => setPage(1)} disabled={currentPage === 1}>&#171; First</button>
+          <button className="pagination-btn" onClick={() => setPage(currentPage - 1)} disabled={currentPage === 1}>&#8249; Prev</button>
+          <div className="page-numbers">
+            {pageNumbers.map(page => (
+              <button
+                key={page}
+                className={`page-number${page === currentPage ? ' active' : ''}`}
+                onClick={() => setPage(page)}
+                disabled={page === currentPage}
+              >
+                {page}
+              </button>
+            ))}
+          </div>
+          <button className="pagination-btn" onClick={() => setPage(currentPage + 1)} disabled={currentPage === totalPages}>Next &#8250;</button>
+          <button className="pagination-btn" onClick={() => setPage(totalPages)} disabled={currentPage === totalPages}>Last &#187;</button>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -206,43 +257,44 @@ const Schedule: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void 
             </Col>
           </Row>
 
-          <Row>
-            <Col>
-              <Card className="shadow-sm">
-                <Card.Body style={{ marginLeft: "10px", marginRight: "10px", paddingBottom: "0px" }}>
-                  <h3 className="mb-4">Scheduled Sessions</h3>
-                  <div className="table-responsive">
-                    <table className="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>Patient</th>
-                          <th>Date</th>
-                          <th>Time</th>
-                          <th>Unit</th>
-                          <th>Technician</th>
-                          <th>Doctor</th>
-                          <th>Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {schedules.map(schedule => (
-                          <tr key={schedule.id}>
-                            <td>{schedule.patientName}</td>
-                            <td>{schedule.date}</td>
-                            <td>{schedule.time}</td>
-                            <td>{schedule.dialysisUnit}</td>
-                            <td>{schedule.technician}</td>
-                            <td>{schedule.admittingDoctor}</td>
-                            <td>{schedule.status}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
+          <div className="table-container" style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+            <div className='dashboard-table-heading'>Scheduled Sessions: {schedules.length}</div>
+            <table className="vehicles-table">
+              <thead>
+                <tr>
+                  <th>Patient</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Unit</th>
+                  <th>Technician</th>
+                  <th>Doctor</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {paginatedSchedules.length > 0 ? (
+                  paginatedSchedules.map(schedule => (
+                    <tr key={schedule.id}>
+                      <td>{schedule.patientName}</td>
+                      <td>{schedule.date}</td>
+                      <td>{schedule.time}</td>
+                      <td>{schedule.dialysisUnit}</td>
+                      <td>{schedule.technician}</td>
+                      <td>{schedule.admittingDoctor}</td>
+                      <td>{schedule.status}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={7} className="text-center text-muted">
+                      No scheduled sessions found.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+            {schedulesTotalPages > 1 && renderPagination(schedulesPage, schedulesTotalPages, setSchedulesPage, schedulesRowsPerPage, setSchedulesRowsPerPage)}
+          </div>
         </div>
         <Footer />
       </Container>
