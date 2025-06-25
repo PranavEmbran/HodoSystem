@@ -39,7 +39,6 @@ interface DialysisProcessFormValues {
     preDialysis: VitalSigns;
     postDialysis: VitalSigns;
   };
-  labResults: LabResults;
   treatmentParameters: TreatmentParameters;
   nursingNotes: string;
 }
@@ -50,31 +49,25 @@ const validationSchema = Yup.object({
   endTime: Yup.string().required('End time is required'),
   vitalSigns: Yup.object({
     preDialysis: Yup.object({
-      bloodPressure: Yup.string().required('Pre-dialysis blood pressure is required'),
-      heartRate: Yup.number().required('Pre-dialysis heart rate is required'),
-      temperature: Yup.number().required('Pre-dialysis temperature is required'),
-      weight: Yup.number().required('Pre-dialysis weight is required')
+      bloodPressure: Yup.string().optional(),
+      heartRate: Yup.number().optional(),
+      temperature: Yup.number().optional(),
+      weight: Yup.number().optional()
     }),
     postDialysis: Yup.object({
-      bloodPressure: Yup.string().required('Post-dialysis blood pressure is required'),
-      heartRate: Yup.number().required('Post-dialysis heart rate is required'),
-      temperature: Yup.number().required('Post-dialysis temperature is required'),
-      weight: Yup.number().required('Post-dialysis weight is required')
+      bloodPressure: Yup.string().optional(),
+      heartRate: Yup.number().optional(),
+      temperature: Yup.number().optional(),
+      weight: Yup.number().optional()
     })
   }),
-  labResults: Yup.object({
-    urea: Yup.number().required('Urea level is required'),
-    creatinine: Yup.number().required('Creatinine level is required'),
-    potassium: Yup.number().required('Potassium level is required'),
-    sodium: Yup.number().required('Sodium level is required')
-  }),
   treatmentParameters: Yup.object({
-    dialyzer: Yup.string().required('Dialyzer is required'),
-    bloodFlow: Yup.number().required('Blood flow is required'),
-    dialysateFlow: Yup.number().required('Dialysate flow is required'),
-    ultrafiltration: Yup.number().required('Ultrafiltration is required')
+    dialyzer: Yup.string().optional(),
+    bloodFlow: Yup.number().optional(),
+    dialysateFlow: Yup.number().optional(),
+    ultrafiltration: Yup.number().optional()
   }),
-  nursingNotes: Yup.string().required('Nursing notes are required')
+  nursingNotes: Yup.string().optional()
 });
 
 const DialysisProcess: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void }> = ({ sidebarCollapsed, toggleSidebar }) => { 
@@ -114,12 +107,6 @@ const DialysisProcess: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () =
         weight: ''
       }
     },
-    labResults: {
-      urea: '',
-      creatinine: '',
-      potassium: '',
-      sodium: ''
-    },
     treatmentParameters: {
       dialyzer: '',
       bloodFlow: '',
@@ -131,6 +118,7 @@ const DialysisProcess: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () =
 
   const handleSubmit = async (values: DialysisProcessFormValues, { resetForm }: FormikHelpers<DialysisProcessFormValues>) => {
     try {
+      console.log('Form submitted with values:', values);
       const patient = patients.find(p => String(p.id) === String(values.patientId));
       const newHistory = {
         ...values,
@@ -138,13 +126,15 @@ const DialysisProcess: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () =
         patientName: patient ? `${patient.firstName} ${patient.lastName}` : '',
         date: new Date().toISOString().split('T')[0]
       };
-      await historyApi.addHistory(newHistory);
+      console.log('Sending to API:', newHistory);
+      const response = await historyApi.addHistory(newHistory);
+      console.log('API response:', response);
       setSuccess(true);
       setError('');
       resetForm();
       setTimeout(() => setSuccess(false), 3000);
     } catch (err) {
-      console.log('Failed to record dialysis session', err);
+      console.error('Failed to record dialysis session:', err);
       setError('Failed to record dialysis session. Please try again.');
     }
   };
@@ -353,66 +343,6 @@ const DialysisProcess: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () =
                       </Col>
 
                       <Col md={6}>
-                        {/* <Card className="mb-2">
-                          <Card.Body>
-                            <h4 className="home-title">Lab Results</h4>
-                            <Row>
-                              <Col md={6}>
-                                <div className="form-group">
-                                  <label htmlFor="labResults.urea">Urea</label>
-                                  <Field
-                                    type="number"
-                                    id="labResults.urea"
-                                    name="labResults.urea"
-                                    className="form-control"
-                                  />
-                                  <ErrorMessage name="labResults.urea" component="div" className="text-danger" />
-                                </div>
-                              </Col>
-                              <Col md={6}>
-                                <div className="form-group">
-                                  <label htmlFor="labResults.creatinine">Creatinine</label>
-                                  <Field
-                                    type="number"
-                                    step="0.1"
-                                    id="labResults.creatinine"
-                                    name="labResults.creatinine"
-                                    className="form-control"
-                                  />
-                                  <ErrorMessage name="labResults.creatinine" component="div" className="text-danger" />
-                                </div>
-                              </Col>
-                            </Row>
-                            <Row>
-                              <Col md={6}>
-                                <div className="form-group">
-                                  <label htmlFor="labResults.potassium">Potassium</label>
-                                  <Field
-                                    type="number"
-                                    step="0.1"
-                                    id="labResults.potassium"
-                                    name="labResults.potassium"
-                                    className="form-control"
-                                  />
-                                  <ErrorMessage name="labResults.potassium" component="div" className="text-danger" />
-                                </div>
-                              </Col>
-                              <Col md={6}>
-                                <div className="form-group">
-                                  <label htmlFor="labResults.sodium">Sodium</label>
-                                  <Field
-                                    type="number"
-                                    id="labResults.sodium"
-                                    name="labResults.sodium"
-                                    className="form-control"
-                                  />
-                                  <ErrorMessage name="labResults.sodium" component="div" className="text-danger" />
-                                </div>
-                              </Col>
-                            </Row>
-                          </Card.Body>
-                        </Card> */}
-
                         <Card className="mb-2">
                           <Card.Body>
                             <h4 className="home-title">Treatment Parameters</h4>

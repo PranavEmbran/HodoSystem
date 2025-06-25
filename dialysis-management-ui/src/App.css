@@ -3,6 +3,11 @@
 h1,h2,h3,h4,h5,h6 {
 color: #5A5A5A !important;}
 
+* {
+  font-family: 'Poppins', 'sans-serif';
+}
+
+
 .app {
   display: flex;
   flex-direction: column;
@@ -151,7 +156,7 @@ color: #ffffff;
   width: 100%;
   min-height: fit-content;
   /* min-height: auto; */
-  padding: 32px 0;
+  padding: 32px 10px;
   border-top: 5px solid #0097a7;
   height: calc(100vh - 64px);
   /* or whatever header/footer size you subtract */

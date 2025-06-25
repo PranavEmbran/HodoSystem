@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { FaSearch, FaBell, FaCog, FaChevronDown, FaBars} from 'react-icons/fa';
+import { FaSearch, FaBell, FaCog, FaChevronDown, FaBars, FaCaretDown} from 'react-icons/fa';
 import './TopNav.css';
 
 interface TopNavProps {
@@ -61,9 +61,12 @@ const TopNav: React.FC<TopNavProps> = ({ searchQuery, setSearchQuery }) => {
         </Link>
         <ul className="nav-list2">
           <li className='nav-link'><NavLink to="/dashboard" className={({ isActive }) => isActive ? 'active' : ''}>Dashboard</NavLink></li>
-          <li className='nav-link'><NavLink to="/registration" className={({ isActive }) => isActive ? 'active' : ''}>Patient Registration</NavLink></li>
-          <li className='nav-link'><NavLink to="/schedule" className={({ isActive }) => isActive ? 'active' : ''}>Schedule</NavLink></li>
-          <li className='nav-link'><NavLink to="/process" className={({ isActive }) => isActive ? 'active' : ''}>Start Dialysis</NavLink></li>
+          {/* <li className='nav-link'><NavLink to="/registration" className={({ isActive }) => isActive ? 'active' : ''}>Patient Registration</NavLink></li> */}
+          <li className='nav-link'><NavLink to="/registration" className={({ isActive }) => isActive ? 'active' : ''}>Billing</NavLink></li>
+          {/* <li className='nav-link'><NavLink to="/schedule" className={({ isActive }) => isActive ? 'active' : ''}>Schedule</NavLink></li> */}
+          <li className='nav-link'><NavLink to="/schedule" className={({ isActive }) => isActive ? 'active' : ''}>Pharmacy</NavLink></li>
+          {/* <li className='nav-link'><NavLink to="/process" className={({ isActive }) => isActive ? 'active' : ''}>Start Dialysis</NavLink></li> */}
+          <li className='nav-link'><NavLink to="/process" className={({ isActive }) => isActive ? 'active' : ''}>Appoinments</NavLink></li>
           {/* <li className='nav-link'><NavLink to="/dialysis-flow-chart" className={({ isActive }) => isActive ? 'active' : ''}>Flow Chart</NavLink></li>
           <li className='nav-link'><NavLink to="/haemodialysis-record-details" className={({ isActive }) => isActive ? 'active' : ''}>HD Record</NavLink></li>
           <li className='nav-link'><NavLink to="/billing" className={({ isActive }) => isActive ? 'active' : ''}>Billing</NavLink></li>
@@ -72,7 +75,8 @@ const TopNav: React.FC<TopNavProps> = ({ searchQuery, setSearchQuery }) => {
 
         <div className="nav-permanent-more-wrapper" ref={permanentDropdownRef}>
           <button className="nav-permanent-more-btn" onClick={handlePermanentDropdownToggle} aria-expanded={permanentDropdownOpen} aria-controls="nav-permanent-more-dropdown">
-            More <FaChevronDown style={{ marginLeft: 4 }} />
+            {/* More <FaChevronDown style={{ marginLeft: 4 }} /> */}
+            More <FaCaretDown style={{ marginLeft: 4 }} />
           </button>
           {permanentDropdownOpen && (
             <div className="nav-permanent-more-dropdown" id="nav-permanent-more-dropdown">

@@ -262,10 +262,59 @@ function migratePatientIds() {
   return migratedCount;
 }
 
+// Fix duplicate patient IDs
+function fixDuplicatePatientIds() {
+  console.log('🔧 Fixing duplicate patient IDs...');
+  
+  function normalizeDateString(date) {
+    // Accepts 'YYYY-MM-DD' or 'YYYYMMDD'
+    if (!date) return '';
+    if (date.includes('-')) {
+      const [yyyy, mm, dd] = date.split('-');
+      return `${yyyy}${mm.padStart(2, '0')}${dd.padStart(2, '0')}`;
+    }
+    return date;
+  }
+  
+  const db = readDatabase();
+  const seen = new Set();
+  let fixedCount = 0;
+  
+  for (let i = 0; i < db.patients.length; i++) {
+    const patient = db.patients[i];
+    if (seen.has(patient.id)) {
+      // Generate a new unique ID for this date
+      const dateStr = normalizeDateString(patient.catheterInsertionDate);
+      let serial = 1;
+      let newId = `${dateStr}/${String(serial).padStart(3, '0')}`;
+      const existingIds = new Set(db.patients.map(p => p.id));
+      while (existingIds.has(newId)) {
+        serial++;
+        newId = `${dateStr}/${String(serial).padStart(3, '0')}`;
+      }
+      console.log(`  Fixed duplicate patient ID for ${patient.firstName} ${patient.lastName}: ${patient.id} → ${newId}`);
+      patient.id = newId;
+      fixedCount++;
+      seen.add(newId);
+    } else {
+      seen.add(patient.id);
+    }
+  }
+  
+  if (fixedCount > 0) {
+    writeDatabase(db);
+    console.log(`✅ Fixed ${fixedCount} duplicate patient IDs`);
+  } else {
+    console.log('✅ No duplicate patient IDs found');
+  }
+  return fixedCount;
+}
+
 // Run migration if script is executed directly
 if (require.main === module) {
   runAllFixes();
   migratePatientIds();
+  fixDuplicatePatientIds();
 }
 
 module.exports = {
@@ -273,5 +322,6 @@ module.exports = {
   addMissingMedicalDates,
   standardizeDateFormats,
   runAllFixes,
-  migratePatientIds
+  migratePatientIds,
+  fixDuplicatePatientIds
 }; 

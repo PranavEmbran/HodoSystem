@@ -70,4 +70,46 @@ export const restoreDatabase = (backupPath: string): void => {
     console.error('Error restoring database:', error);
     throw new Error('Failed to restore database');
   }
+};
+
+// Utility: Check for duplicate patient IDs
+export const findDuplicatePatientIds = (): string[] => {
+  const db = readDatabase();
+  const seen = new Set();
+  const duplicates = new Set();
+  for (const patient of db.patients || []) {
+    if (seen.has(patient.id)) {
+      duplicates.add(patient.id);
+    } else {
+      seen.add(patient.id);
+    }
+  }
+  return Array.from(duplicates);
+};
+
+// Utility: Fix duplicate patient IDs (assigns new unique IDs to duplicates)
+export const fixDuplicatePatientIds = (): number => {
+  const db = readDatabase();
+  const idMap = new Map();
+  let fixed = 0;
+  for (const patient of db.patients || []) {
+    if (idMap.has(patient.id)) {
+      // Generate a new unique ID for this patient
+      const dateStr = (patient.catheterInsertionDate || '').replace(/-/g, '');
+      let serial = 1;
+      let newId = `${dateStr}/${String(serial).padStart(3, '0')}`;
+      const existingIds = new Set(db.patients.map(p => p.id));
+      while (existingIds.has(newId)) {
+        serial++;
+        newId = `${dateStr}/${String(serial).padStart(3, '0')}`;
+      }
+      patient.id = newId;
+      fixed++;
+      idMap.set(newId, true);
+    } else {
+      idMap.set(patient.id, true);
+    }
+  }
+  writeDatabase(db);
+  return fixed;
 }; 

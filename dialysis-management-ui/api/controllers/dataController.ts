@@ -119,6 +119,16 @@ function writeDB(data: Database): void {
   }
 }
 
+function normalizeDateString(date: string): string {
+  // Accepts 'YYYY-MM-DD' or 'YYYYMMDD'
+  if (!date) return '';
+  if (date.includes('-')) {
+    const [yyyy, mm, dd] = date.split('-');
+    return `${yyyy}${mm.padStart(2, '0')}${dd.padStart(2, '0')}`;
+  }
+  return date;
+}
+
 // Patients
 export const getPatients = (req: Request, res: Response): any => {
   try {
@@ -159,8 +169,25 @@ export const addPatient = (req: Request, res: Response): any => {
     }
 
     const db = readDB();
-    // Always use generatePatientId for new patient
-    const newPatientId = generatePatientId(catheterInsertionDate);
+    const dateStr = normalizeDateString(catheterInsertionDate);
+
+    const serials = db.patients
+      .filter(p => {
+        // Normalize the date part of the patient ID for comparison
+        if (!p.id) return false;
+        const idDatePart = p.id.split('/')[0];
+        return idDatePart === dateStr;
+      })
+      .map(p => parseInt((p.id.split('/')[1] || '0'), 10))
+      .filter(n => !isNaN(n));
+
+    const maxSerial = serials.length > 0 ? Math.max(...serials) : 0;
+    const nextSerial = maxSerial + 1;
+    const newPatientId = `${dateStr}/${String(nextSerial).padStart(3, '0')}`;
+    // Ensure uniqueness (should never hit, but just in case)
+    if (db.patients.some(p => p.id === newPatientId)) {
+      return res.status(500).json({ message: 'Failed to generate unique patient ID. Please try again.' });
+    }
     const newPatient: Patient = {
       id: newPatientId,
       firstName,
