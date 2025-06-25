@@ -66,7 +66,7 @@ const TopNav: React.FC<TopNavProps> = ({ searchQuery, setSearchQuery }) => {
           {/* <li className='nav-link'><NavLink to="/schedule" className={({ isActive }) => isActive ? 'active' : ''}>Schedule</NavLink></li> */}
           <li className='nav-link'><NavLink to="/schedule" className={({ isActive }) => isActive ? 'active' : ''}>Pharmacy</NavLink></li>
           {/* <li className='nav-link'><NavLink to="/process" className={({ isActive }) => isActive ? 'active' : ''}>Start Dialysis</NavLink></li> */}
-          <li className='nav-link'><NavLink to="/process" className={({ isActive }) => isActive ? 'active' : ''}>Appoinments</NavLink></li>
+          <li className='nav-link'><NavLink to="/process" className={({ isActive }) => isActive ? 'active' : ''}>Appointment</NavLink></li>
           {/* <li className='nav-link'><NavLink to="/dialysis-flow-chart" className={({ isActive }) => isActive ? 'active' : ''}>Flow Chart</NavLink></li>
           <li className='nav-link'><NavLink to="/haemodialysis-record-details" className={({ isActive }) => isActive ? 'active' : ''}>HD Record</NavLink></li>
           <li className='nav-link'><NavLink to="/billing" className={({ isActive }) => isActive ? 'active' : ''}>Billing</NavLink></li>
