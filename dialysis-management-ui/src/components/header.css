@@ -36,16 +36,20 @@
 }
 
 .sidebar-toggle-btn:hover {
-    background-color: #0d92ae;
+    background-color: none;
+    border: none;
     color: white;
     border-color: #0d92ae;
     transform: scale(1.05);
 }
 
 .sidebar-toggle-btn:focus {
+    background: none;
+    border: none;
     outline: none;
-    box-shadow: 0 0 0 2px rgba(13, 146, 174, 0.3);
+    box-shadow: none;
 }
+
 
 /* Header Div with Icons */
 .header-div {

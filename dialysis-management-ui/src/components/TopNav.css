@@ -344,7 +344,7 @@
   top: 110%;
   left: 0;
   min-width: 180px;
-  background: #101010;
+  background: #fff;
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   /* z-index: 1002; */
@@ -354,11 +354,11 @@
 }
 
 .nav-permanent-more-dropdown a {
-  color: #fff;
+  color: #000;
   text-decoration: none;
-  padding: 12px 20px;
-  font-size: 15px;
-  border-bottom: 1px solid #222;
+  padding: 5px 15px;
+  font-size: 12px;
+  /* border-bottom: 1px solid #222; */
   transition: background 0.2s, color 0.2s;
 }
 
