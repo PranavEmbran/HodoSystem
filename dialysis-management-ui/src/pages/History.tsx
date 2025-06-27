@@ -66,9 +66,9 @@ const History: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void }
       <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
         <div className="main-container">
-          <div style={{ width: '100%', padding: '10px',marginTop: '-20px' }}>
+          {/* <div style={{ width: '100%', padding: '10px',marginTop: '-20px' }}> */}
             <SectionHeading title="History" subtitle="View and manage dialysis session history" />
-          </div>
+          {/* </div> */}
           <div className="history-header">
             <h2 className="history-title">Dialysis History</h2>
 

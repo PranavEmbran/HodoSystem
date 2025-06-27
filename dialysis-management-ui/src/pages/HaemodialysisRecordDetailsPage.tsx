@@ -12,9 +12,9 @@ const HaemodialysisRecordDetailsPage: React.FC<{ sidebarCollapsed: boolean; togg
     <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
       <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
       <div className="main-container">
-        <div style={{ width: '100%', padding: '10px',marginTop: '-20px' }}>
+        {/* <div style={{ width: '100%', padding: '10px',marginTop: '-20px' }}> */}
           <SectionHeading title="Haemodialysis Record Details" subtitle="Detailed records for haemodialysis sessions" />
-        </div>
+        {/* </div> */}
       <HaemodialysisRecordDetails />
       </div>
       <Footer />

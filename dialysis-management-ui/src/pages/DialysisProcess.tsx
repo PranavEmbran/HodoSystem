@@ -145,9 +145,9 @@ const DialysisProcess: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () =
     <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
     <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
     <div className="main-container">
-      <div style={{ width: '100%' ,padding: '10px',marginTop: '-20px' }}>
+      {/* <div style={{ width: '100%' ,padding: '10px',marginTop: '-20px' }}> */}
         <SectionHeading title="Dialysis Process" subtitle="Monitor and record dialysis procedures" />
-      </div>
+      {/* </div> */}
       <Row>
         <Col>
           <Card className="shadow-sm">

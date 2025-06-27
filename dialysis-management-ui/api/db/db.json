@@ -74,6 +74,21 @@
       "fistulaDate": "2025-06-26",
       "phone": "6549873216",
       "id": "20250626/005"
+    },
+    {
+      "firstName": "Subhadra",
+      "lastName": "Sharma",
+      "gender": "Male",
+      "dateOfBirth": "2000-02-16",
+      "mobileNo": "6549873216",
+      "bloodGroup": "B+",
+      "catheterInsertionDate": "2025-06-26",
+      "fistulaCreationDate": "2025-06-26",
+      "name": "Subhadra Sharma",
+      "catheterDate": "2025-06-26",
+      "fistulaDate": "2025-06-26",
+      "phone": "6549873216",
+      "id": "20250626/006"
     }
   ],
   "appointments": [
@@ -131,9 +146,76 @@
       "remarks": "d",
       "patientName": "Vikas C",
       "id": "1750927079121"
+    },
+    {
+      "patientId": "20250626/006",
+      "dialysisUnit": "Unit A",
+      "technician": "Dr. Brown",
+      "admittingDoctor": "Dr. Miller",
+      "date": "2025-06-26",
+      "time": "14:18",
+      "remarks": "jj",
+      "patientName": "Subhadra Sharma",
+      "id": "1750927701527"
+    },
+    {
+      "patientId": "20250626/004",
+      "dialysisUnit": "Unit D",
+      "technician": "Dr. Davis",
+      "admittingDoctor": "Dr. Miller",
+      "date": "2025-07-12",
+      "time": "14:20",
+      "remarks": "d",
+      "patientName": "Vikas C",
+      "id": "1750927815455"
+    },
+    {
+      "patientId": "20250626/004",
+      "dialysisUnit": "Unit B",
+      "technician": "Dr. Smith",
+      "admittingDoctor": "Dr. Garcia",
+      "date": "2025-07-30",
+      "time": "14:20",
+      "remarks": "www",
+      "patientName": "Vikas C",
+      "id": "1750927869769"
+    },
+    {
+      "patientId": "20250626/006",
+      "dialysisUnit": "Unit B",
+      "technician": "Dr. Wilson",
+      "admittingDoctor": "Dr. Miller",
+      "date": "2025-06-30",
+      "time": "16:21",
+      "remarks": "f",
+      "patientName": "Subhadra Sharma",
+      "id": "1750927913263"
+    },
+    {
+      "patientId": "20250626/005",
+      "dialysisUnit": "Unit B",
+      "technician": "Dr. Smith",
+      "admittingDoctor": "Dr. Davis",
+      "date": "2025-06-26",
+      "time": "14:40",
+      "remarks": "555",
+      "patientName": "Shiva Kumar",
+      "id": "1750928843385"
     }
   ],
-  "billing": [],
+  "billing": [
+    {
+      "patientId": "20250626/004",
+      "sessionDate": "2025-06-26",
+      "sessionDuration": 120,
+      "amount": 1000,
+      "patientName": "Vikas C",
+      "totalAmount": 1000,
+      "status": "PAID",
+      "date": "2025-06-26",
+      "id": "1750927228786"
+    }
+  ],
   "history": [
     {
       "patientId": "20250626/001",
@@ -163,6 +245,35 @@
       "patientName": "Vignesh Sharma",
       "date": "2025-06-26",
       "id": "1750925541154"
+    },
+    {
+      "patientId": "20250626/001",
+      "startTime": "15:25",
+      "endTime": "18:25",
+      "vitalSigns": {
+        "preDialysis": {
+          "bloodPressure": "43",
+          "heartRate": 32,
+          "temperature": 23,
+          "weight": 34
+        },
+        "postDialysis": {
+          "bloodPressure": "234",
+          "heartRate": 43,
+          "temperature": 43,
+          "weight": 23
+        }
+      },
+      "treatmentParameters": {
+        "dialyzer": "45",
+        "bloodFlow": 23,
+        "dialysateFlow": 23,
+        "ultrafiltration": 43
+      },
+      "nursingNotes": "23",
+      "patientName": "Vignesh Sharma",
+      "date": "2025-06-26",
+      "id": "1750928107532"
     }
   ],
   "dialysisFlowCharts": [],

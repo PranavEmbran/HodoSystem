@@ -322,9 +322,9 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
         <div className="main-container">
 
-          <div style={{ width: '100%', padding: '10px',marginTop: '-20px'  }}>
+          {/* <div style={{ width: '100%', padding: '10px',marginTop: '-20px' }}> */}
             <SectionHeading title="Dashboard" subtitle="Overview and quick stats for dialysis management" />
-          </div>
+          {/* </div> */}
           <Row className="mb-4">
             {stats.map((stat) => (
               <Col key={stat.label} md={4} className="mb-3 d-grid">
@@ -482,7 +482,7 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
           {/* <Row> */}
           {/* <Col> */}
           <div className="table-container" style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-            <div className='dashboard-table-heading'>Recent Appointments: {filteredData.appointments.length}</div>
+            <div className='dashboard-table-heading'>Scheduled Appointments: {filteredData.appointments.length}</div>
             <table className="vehicles-table">
               <thead>
                 <tr>
