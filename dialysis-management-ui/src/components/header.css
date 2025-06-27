@@ -1,16 +1,16 @@
 .header-container {
     position: relative;
-    /* position: fixed; */
     top: 0;
+    /* z-index: 1000; */
     display: flex;
     align-items: center;
     gap: 15px;
-    /* margin-left: 15px; */
-    /* margin-right: 15px; */
-    margin-top: 10px;
-    padding: 5px 0px;
+    padding: 0;
     background-color: #d9e0e7;
-
+    margin-left: 25px;
+    margin-right: 25px;
+    /* border: 1px solid black; */
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 }
 
 .header-container h1 {
@@ -24,10 +24,12 @@
 /* Sidebar Toggle Button */
 .sidebar-toggle-btn {
     background: none;
-    border: 1px solid #dee2e6;
-    color: #0d92ae;
+    /* border: 1px solid #dee2e6; */
+    /* color: #0d92ae; */
     cursor: pointer;
     padding: 8px;
+    /* margin-left: 10px; */
+    margin: 0px 6px 0px 10px;
     border-radius: 4px;
     display: flex;
     align-items: center;
@@ -36,27 +38,21 @@
 }
 
 .sidebar-toggle-btn:hover {
-    background-color: none;
     border: none;
-    color: white;
-    border-color: #0d92ae;
-    transform: scale(1.05);
-}
-
-.sidebar-toggle-btn:focus {
-    background: none;
-    border: none;
-    outline: none;
-    box-shadow: none;
+    background-color: transparent;
 }
 
 
 /* Header Div with Icons */
 .header-div {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
+    align-items: flex-end;
     justify-content: flex-end;
-    padding: 8px 12px;
+    margin-top: 10px;
+    /* border: 1px solid red; */
+    padding: 3px 5px;
+    /* padding: 0px 15px; */
     /* background-color: white; */
     /* border-radius: 6px; */
     /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
@@ -66,7 +62,9 @@
 .icons-div {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 5px;
+    /* margin-top: 5px; */
+    /* border:1px solid yellow; */
     flex-wrap: nowrap;
     width: 100%;
     justify-content: flex-end;
@@ -93,13 +91,19 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.header-span{
+
+.header-span {
     color: #888888;
-    font-size: 14px;;
+    font-size: 14px;
+    font-weight: 600;
+    width: 100%;
 }
-.header-icon{
+
+.header-icon {
     background-color: white;
     color: black !important;
-    padding: 4px;
-    border-radius: 4px;
+    font-size: 16px;
+    width: 26px;
+    padding: 5px;
+    border-radius: 7px;
 }

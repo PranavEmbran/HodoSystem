@@ -1,0 +1,51 @@
+.custom-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #000000;
+}
+
+.custom-input,
+.custom-textarea,
+.custom-select,
+.custom-date {
+  width: 200%;
+  padding: 0.7rem 1rem;
+  border: 1px solid #c9c9c9;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  transition: border-color 0.2s;
+  background: #ffffff;
+}
+
+.custom-input:focus,
+.custom-textarea:focus,
+.custom-select:focus,
+.custom-date:focus {
+  border-color: #000000;
+  outline: black;
+  box-shadow: 0 0 0 2px rgba(55, 124, 170, 0.15);
+}
+
+.custom-textarea {
+  min-height: 80px;
+  resize: vertical;
+}

@@ -1,28 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import './Header.css';
+import './header.css';
 import { ChevronLeftIcon, ChevronRightIcon } from '@primer/octicons-react';
+import rightarrow from '../assets/righthand.png'
+import leftarrow from '../assets/lefthand.png'
 import { Calendar, Clock, Calculator } from 'lucide-react';
-import { FaCalculator, FaCalendarAlt, FaClock } from 'react-icons/fa';
 
 interface HeaderProps {
-  sidebarCollapsed: boolean;
-  toggleSidebar: () => void;
+    sidebarCollapsed?: boolean;
+    toggleSidebar?: () => void;
+    showDate?: boolean;
+    showTime?: boolean;
+    showCalculator?: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({ sidebarCollapsed, toggleSidebar }) => {
+const Header: React.FC<HeaderProps> = ({ sidebarCollapsed, toggleSidebar, showDate = true, showTime = true, showCalculator = false }) => {
+
     const [currentTime, setCurrentTime] = useState<Date>(new Date());
 
-    const currentDate: string = new Date().toLocaleDateString('en-US', {
-        weekday: 'short',
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-    });
+    const currentDateObj = new Date();
+    const day = currentDateObj.toLocaleDateString('en-US', { weekday: 'short' });
+    const date = currentDateObj.getDate();
+    const month = currentDateObj.toLocaleDateString('en-US', { month: 'short' });
+    const year = currentDateObj.getFullYear();
+    const currentDate = `${day} ${date} ${month} ${year}`;
 
-    const formattedTime: string = currentTime.toLocaleTimeString('en-US', {
+    const formattedTime = currentTime.toLocaleTimeString('en-US', {
         hour: '2-digit',
         minute: '2-digit',
-        second: '2-digit'
+        second: '2-digit',
+        hour12: false
     });
 
     // Update time every second
@@ -37,37 +43,45 @@ const Header: React.FC<HeaderProps> = ({ sidebarCollapsed, toggleSidebar }) => {
 
     return (
         <div className='header-container'>
-            <button
-                className="sidebar-toggle-btn"
-                onClick={toggleSidebar}
-                title={sidebarCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
-            >
-                <img
-                    src="/lefthand.png"
-                    alt="Toggle Sidebar"
-                    style={{ width: 24, height: 24, transform: sidebarCollapsed ? "scaleX(-1)" : "none" }}
-                />
-            </button>
-            {/* <h1>Dialysis Management</h1> */}
+            {toggleSidebar && (
+                <button
+                    className="sidebar-toggle-btn"
+                    onClick={toggleSidebar}
+                    title={sidebarCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
+                >
+                    {sidebarCollapsed ? (
+                        <img src={rightarrow} alt="Expand Sidebar" />
+                    ) : (
+                        <img src={leftarrow} alt="Collapse Sidebar" />
+                    )}
+                </button>
+            )}
+
             <h1></h1>
-            <div className="header-div ">
-                <div className="icons-div">
-                    <div className="icon-item">
-                        {/* <Calendar size={25} className='header-icon' /> */}
-                        <FaCalendarAlt size={25} className='header-icon' />
-                        <span className='header-span'>{currentDate}</span>
+            <div className="header-div">
+                {(showDate || showTime || showCalculator) && (
+                    <div className="icons-div">
+                        {showDate && (
+                            <div className="icon-item">
+                                <i className="header-icon fa-solid fa-calendar-days"></i>
+                                <span className="header-span">{currentDate}</span>
+                            </div>
+                        )}
+                        {showTime && (
+                            <div className="icon-item">
+                                <i className="header-icon fa-solid fa-clock custom-clock"></i>
+                                <span className="header-span">{formattedTime}</span>
+                            </div>
+                        )}
+                        {showCalculator && (
+                            <div className="icon-item">
+                                <i className="header-icon fa-solid fa-calculator"></i>
+                            </div>
+                        )}
                     </div>
-                    <div className="icon-item">
-                        <FaClock size={25} className='header-icon' />
-                        <span className='header-span'>{formattedTime}</span>
-                    </div>
-                    <div className="icon-item">
-                        {/* <Calculator size={25} className='header-icon' /> */}
-                        <FaCalculator size={25} className='header-icon' />
-                        {/* <span>Calculator</span> */}
-                    </div>
-                </div>
+                )}
             </div>
+
         </div>
     );
 };

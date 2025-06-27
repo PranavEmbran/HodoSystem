@@ -4,6 +4,7 @@ import { Container, Row, Col, Form, Button, InputGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Home.css';
 import Footer from '../components/Footer';
+// import Header from '../components/Header';
 import Header from '../components/Header';
 import { patientsApi } from '../api/patientsApi';
 import { scheduleApi } from '../api/scheduleApi';
@@ -302,7 +303,6 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
 
   if (error) {
     return (
-      // <Container fluid className="home-container py-5">
       <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
 
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
@@ -318,19 +318,14 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
   return (
     <>
       <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
-        {/* <div className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}> */}
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
         <div className="main-container">
 
-          {/* <div style={{ width: '100%', padding: '10px',marginTop: '-20px' }}> */}
-            <SectionHeading title="Dashboard" subtitle="Overview and quick stats for dialysis management" />
-          {/* </div> */}
+          <SectionHeading title="Dashboard" subtitle="Overview and quick stats for dialysis management" />
           <Row className="mb-4">
             {stats.map((stat) => (
               <Col key={stat.label} md={4} className="mb-3 d-grid">
-                {/* <div className="dashboard-card text-center p-4 shadow-sm rounded bg-white w-100 d-flex flex-column align-items-center justify-content-center"> */}
                 <div className="dashboard-card">
-                  {/* <div className="dashboard-icon mb-2">{stat.icon}</div> */}
                   <div className="dashboard-content">
                     <div className="dashboard-label">{stat.label}</div>
                     <div className="dashboard-value mb-1">{stat.value}</div>
@@ -340,100 +335,7 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
             ))}
           </Row>
 
-          {/* <Row className="mb-3 align-items-end g-3">
-            <Col xs={12} md={2}>
-              <Form.Label>From Date</Form.Label>
-              <Form.Control
-                type="date"
-                value={fromDate}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => setFromDate(e.target.value)}
-              />
-            </Col>
-            <Col xs={12} md={2}>
-              <Form.Label>To Date</Form.Label>
-              <Form.Control
-                type="date"
-                value={toDate}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => setToDate(e.target.value)}
-              />
-            </Col>
-            <Col xs={12} md={2}>
-              <Form.Label>Current Status</Form.Label>
-              <Form.Select
-                value={status}
-                onChange={(e: ChangeEvent<HTMLSelectElement>) => setStatus(e.target.value)}
-              >
-                <option value="">Select Status</option>
-                <option value="Admitted">Admitted</option>
-                <option value="Discharged">Discharged</option>
-                <option value="Scheduled">Scheduled</option>
-                <option value="Completed">Completed</option>
-              </Form.Select>
-            </Col>
-            <Col xs={12} md={1} className="d-flex flex-column">
-              <Form.Label>OP/IP</Form.Label>
-              <InputGroup>
-                <Form.Check
-                  type="switch"
-                  id="op-ip-switch"
-                  label={opIp}
-                  checked={opIp === 'IP'}
-                  onChange={() => setOpIp(opIp === 'OP' ? 'IP' : 'OP')}
-                />
-              </InputGroup>
-            </Col>
-            <Col xs={12} md={2}>
-              <Form.Label>Auto-Refresh Timer</Form.Label>
-              <InputGroup>
-                <Form.Select
-                  value={autoRefresh}
-                  onChange={(e: ChangeEvent<HTMLSelectElement>) => setAutoRefresh(Number(e.target.value))}
-                >
-                  <option value={0}>Off</option>
-                  <option value={5}>5 Minutes</option>
-                  <option value={15}>15 Minutes</option>
-                  <option value={30}>30 Minutes</option>
-                </Form.Select>
-                <Button
-                  variant="outline-secondary"
-                  title="Refresh"
-                  onClick={handleRefresh}
-                >
-                  <i className="bi bi-arrow-clockwise"></i>
-                </Button>
-              </InputGroup>
-            </Col>
-            <Col xs={12} md={1} className="d-flex flex-column align-items-center">
-              <Form.Label>Show All Patients</Form.Label>
-              <Form.Check
-                type="checkbox"
-                checked={showAll}
-                onChange={() => setShowAll(!showAll)}
-                label=""
-              />
-            </Col>
-            <Col xs={12} md={1}>
-              <Form.Label>Search</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Search..."
-                value={search}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
-              />
-            </Col>
-            <Col xs={12} md={1}>
-              <Form.Label>&nbsp;</Form.Label>
-              <Button
-                variant="outline-secondary"
-                onClick={handleResetFilters}
-                className="w-100"
-              >
-                Reset
-              </Button>
-            </Col>
-          </Row> */}
 
-        
           <div className="table-container" style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
             <div className='dashboard-table-heading'>Registered Patients: {filteredData.patients.length}</div>
             <table className="vehicles-table">
