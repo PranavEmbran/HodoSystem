@@ -10,6 +10,7 @@ import PageContainer from '../components/PageContainer';
 import Header from '../components/Header';
 import { Patient } from '../types';
 import SectionHeading from '../components/SectionHeading';
+import ButtonWithGradient from '../components/ButtonWithGradient';
 
 interface VitalSigns {
   bloodPressure: string;
@@ -146,7 +147,7 @@ const DialysisProcess: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () =
       <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
         <PageContainer>
-        {/* <div className="main-container"> */}
+          {/* <div className="main-container"> */}
           {/* <div style={{ width: '100%' ,padding: '10px',marginTop: '-20px' }}> */}
           <SectionHeading title="Dialysis Process" subtitle="Monitor and record dialysis procedures" />
           {/* </div> */}
@@ -423,14 +424,11 @@ const DialysisProcess: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () =
                         </Row>
 
                         <div className="text-end">
-                          <button
+                          <ButtonWithGradient
                             type="submit"
-                            // className="btn btn-primary"
-                            className="btn-with-gradient"
                             disabled={isSubmitting}
-                          >
-                            {isSubmitting ? 'Recording...' : 'Record Session'}
-                          </button>
+                            text={isSubmitting ? 'Recording...' : 'Record Session'}
+                          />
                         </div>
                       </Form>
                     )}
@@ -439,7 +437,7 @@ const DialysisProcess: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () =
               </Card>
             </Col>
           </Row>
-        {/* </div> */}
+          {/* </div> */}
         </PageContainer>
         <Footer />
       </Container>

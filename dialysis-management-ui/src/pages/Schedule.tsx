@@ -10,6 +10,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import SectionHeading from '../components/SectionHeading';
 import PageContainer from '../components/PageContainer';
+import ButtonWithGradient from '../components/ButtonWithGradient';
 
 
 interface ScheduleFormValues {
@@ -247,9 +248,11 @@ const Schedule: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void 
                           </Col>
                           <Col md={12}>
                             {/* <button type="submit" className="btn btn-primary" disabled={isSubmitting}> */}
-                            <button type="submit" className="btn-with-gradient" disabled={isSubmitting}>
-                              {isSubmitting ? 'Scheduling...' : 'Schedule Session'}
-                            </button>
+                            <ButtonWithGradient
+                              type="submit"
+                              disabled={isSubmitting}
+                              text={isSubmitting ? 'Scheduling...' : 'Schedule Session'}
+                            />
                           </Col>
                         </Row>
                       </Form>

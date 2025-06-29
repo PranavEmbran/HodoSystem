@@ -9,6 +9,7 @@ import Header from '../components/Header';
 import { Patient } from '../types';
 import SectionHeading from '../components/SectionHeading';
 import { Row, Col, Container } from 'react-bootstrap';
+import ButtonWithGradient from '../components/ButtonWithGradient';
 
 interface PatientFormValues {
   firstName: string;
@@ -71,7 +72,7 @@ const PatientRegistration: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: 
         {/* <div className={`patient-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}> */}
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
         <PageContainer>
-        {/* <div className="main-container"> */}
+          {/* <div className="main-container"> */}
           {/* <div style={{ width: '100%', padding: '10px',marginTop: '-20px' }}> */}
           <SectionHeading title="Patient Registration" subtitle="Register new patients and manage patient details" />
           {/* </div> */}
@@ -227,14 +228,12 @@ const PatientRegistration: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: 
                       </div>
 
                       <div className="text-center mt-4">
-                        <button
+                        <ButtonWithGradient
                           type="submit"
-                          // className="btn btn-primary"
-                          className="btn-with-gradient mx-auto block"
+                          className="mx-auto block"
                           disabled={isSubmitting}
-                        >
-                          {isSubmitting ? 'Registering...' : 'Register Patient'}
-                        </button>
+                          text={isSubmitting ? 'Registering...' : 'Register Patient'}
+                        />
                       </div>
                     </Form>
                   </div>
@@ -242,7 +241,7 @@ const PatientRegistration: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: 
               </Formik>
             </div>
           </div>
-        {/* </div> */}
+          {/* </div> */}
         </PageContainer>
         <Footer />
       </Container>

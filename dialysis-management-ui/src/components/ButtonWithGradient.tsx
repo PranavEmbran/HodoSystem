@@ -1,5 +1,5 @@
 import React from 'react';
-import './ButtonWithGradient.css';
+import '../styles/ButtonWithGradient.css';
 
 export interface ButtonWithGradientProps {
   text?: string;

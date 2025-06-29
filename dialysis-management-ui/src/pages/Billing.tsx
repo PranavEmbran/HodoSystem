@@ -12,6 +12,7 @@ import PageContainer from '../components/PageContainer';
 import Header from '../components/Header';
 import type { Patient, Billing as BillingType } from '../types';
 import SectionHeading from '../components/SectionHeading';
+import ButtonWithGradient from '../components/ButtonWithGradient';
 
 interface BillingFormValues {
   patientId: string;
@@ -218,9 +219,9 @@ const Billing: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void }
                           </Col>
                         </Row>
                         {/*<Button type="submit" variant="primary" disabled={isSubmitting} className="btn-with-gradient">*/}
-                        <Button type="submit" disabled={isSubmitting} className="btn-with-gradient">
+                        <ButtonWithGradient type="submit" disabled={isSubmitting}>
                           {isSubmitting ? 'Adding...' : 'Add Bill'}
-                        </Button>
+                        </ButtonWithGradient>
                       </Form>
                     )}
                   </Formik>

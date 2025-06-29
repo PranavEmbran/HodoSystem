@@ -2,6 +2,7 @@ import React, { useState, useEffect, ChangeEvent } from 'react';
 import { patientsApi } from '../api/patientsApi';
 import { Patient } from '../types';
 import { haemodialysisRecordApi } from '../api/haemodialysisRecordApi';
+import ButtonWithGradient from './ButtonWithGradient';
 import './HaemodialysisRecordDetails.css';
 
 interface Row {
@@ -174,12 +175,12 @@ const HaemodialysisRecordDetails: React.FC = () => {
               ))}
             </tbody>
           </table>
-        </div>  
+        </div>
         <div className="form-actions">
-          <button onClick={handleAddRow} className="btn-add-row btn-with-gradient">Add Row</button>
+          <ButtonWithGradient onClick={handleAddRow} className="btn-add-row" text="Add Row" />
           <div className="action-buttons">
-            <button onClick={handleSave} className="btn-save btn-with-gradient" disabled={!selectedPatientId}>Save</button>
-            <button onClick={handlePrint} className="btn-print-record btn-with-gradient">Print</button>
+            <ButtonWithGradient onClick={handleSave} className="btn-save" disabled={!selectedPatientId} text="Save" />
+            <ButtonWithGradient onClick={handlePrint} className="btn-print-record" text="Print" />
           </div>
         </div>
       </div>

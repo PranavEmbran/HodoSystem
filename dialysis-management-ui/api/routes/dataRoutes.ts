@@ -35,6 +35,17 @@ router.get('/test', (req: Request, res: Response) => {
   res.json({ message: 'API is working!' });
 });
 
+// Debug endpoint to check database path and working directory
+router.get('/debug', (req: Request, res: Response) => {
+  res.json({
+    message: 'Debug info',
+    dbPath: dbPath,
+    workingDirectory: process.cwd(),
+    fileExists: fs.existsSync(dbPath),
+    fileStats: fs.existsSync(dbPath) ? fs.statSync(dbPath) : null
+  });
+});
+
 // Patients endpoints
 router.get('/patients', (req: Request, res: Response) => {
   try {
@@ -55,10 +66,10 @@ router.post('/patients', (req: Request, res: Response) => {
       ...req.body,
       id: newPatientId
     };
-    
+
     db.patients.push(patient);
     writeDatabase(db);
-    
+
     res.status(201).json(patient);
   } catch (error) {
     console.error('Error adding patient:', error);
@@ -84,10 +95,10 @@ router.post('/billing', (req: Request, res: Response) => {
       ...req.body,
       id: Date.now().toString()
     };
-    
+
     db.billing.push(bill);
     writeDatabase(db);
-    
+
     res.status(201).json(bill);
   } catch (error) {
     console.error('Error adding bill:', error);
@@ -113,10 +124,10 @@ router.post('/history', (req: Request, res: Response) => {
       ...req.body,
       id: Date.now().toString()
     };
-    
+
     db.history.push(history);
     writeDatabase(db);
-    
+
     res.status(201).json(history);
   } catch (error) {
     console.error('Error adding history:', error);
@@ -128,7 +139,7 @@ router.delete('/history/:id', (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const db = readDatabase();
-    
+
     const index = db.history.findIndex((h: any) => h.id === id);
     if (index !== -1) {
       db.history.splice(index, 1);
@@ -172,10 +183,10 @@ router.post('/schedule', (req: Request, res: Response) => {
       ...req.body,
       id: Date.now().toString()
     };
-    
+
     db.appointments.push(schedule);
     writeDatabase(db);
-    
+
     res.status(201).json(schedule);
   } catch (error) {
     console.error('Error adding schedule:', error);
@@ -191,10 +202,10 @@ router.post('/schedules', (req: Request, res: Response) => {
       ...req.body,
       id: Date.now().toString()
     };
-    
+
     db.appointments.push(schedule);
     writeDatabase(db);
-    
+
     res.status(201).json(schedule);
   } catch (error) {
     console.error('Error adding schedule:', error);
@@ -209,7 +220,7 @@ router.get('/staff', (req: Request, res: Response) => {
     const staffData = {
       technicians: [
         "Dr. Smith",
-        "Dr. Brown", 
+        "Dr. Brown",
         "Dr. Wilson",
         "Dr. Davis",
         "Dr. Miller"
@@ -223,7 +234,7 @@ router.get('/staff', (req: Request, res: Response) => {
       ],
       units: [
         "Unit A",
-        "Unit B", 
+        "Unit B",
         "Unit C",
         "Unit D"
       ]
@@ -253,10 +264,10 @@ router.post('/dialysis-flow-charts', (req: Request, res: Response) => {
       ...req.body,
       id: Date.now().toString()
     };
-    
+
     db.dialysisFlowCharts.push(dialysisFlowChart);
     writeDatabase(db);
-    
+
     res.status(201).json(dialysisFlowChart);
   } catch (error) {
     console.error('Error adding dialysis flow chart:', error);
@@ -268,7 +279,7 @@ router.delete('/dialysis-flow-charts/:id', (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const db = readDatabase();
-    
+
     const index = db.dialysisFlowCharts.findIndex((d: any) => d.id === id);
     if (index !== -1) {
       db.dialysisFlowCharts.splice(index, 1);

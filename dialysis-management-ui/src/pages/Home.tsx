@@ -12,6 +12,8 @@ import { historyApi } from '../api/historyApi';
 import { Patient, ScheduleEntry, History } from '../types';
 import SectionHeading from '../components/SectionHeading';
 import PageContainer from '../components/PageContainer';
+import Cards from '../components/Cards';
+
 
 interface Stat {
   label: string;
@@ -327,12 +329,7 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
           <Row className="mb-4">
             {stats.map((stat) => (
               <Col key={stat.label} md={4} className="mb-3 d-grid">
-                <div className="dashboard-card">
-                  <div className="dashboard-content">
-                    <div className="dashboard-label">{stat.label}</div>
-                    <div className="dashboard-value mb-1">{stat.value}</div>
-                  </div>
-                </div>
+                <Cards title={stat.label} subtitle={stat.value.toString()} />
               </Col>
             ))}
           </Row>

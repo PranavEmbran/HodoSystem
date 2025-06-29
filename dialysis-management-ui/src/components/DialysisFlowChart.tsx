@@ -4,6 +4,7 @@ import { dialysisFlowChartApi } from '../api/dialysisFlowChartApi';
 import { Patient } from '../types';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
+import ButtonWithGradient from './ButtonWithGradient';
 import './DialysisFlowChart.css';
 
 interface DialysisFlowChartForm {
@@ -138,12 +139,12 @@ const DialysisFlowChart: React.FC = () => {
   const handleExportExcel = () => {
     try {
       const selectedPatient = getSelectedPatient();
-      
+
       // Prepare data for Excel export
       const excelData = [
         {
-          'Patient Name': selectedPatient ? 
-            (selectedPatient.firstName || selectedPatient.name) + 
+          'Patient Name': selectedPatient ?
+            (selectedPatient.firstName || selectedPatient.name) +
             (selectedPatient.lastName ? ' ' + selectedPatient.lastName : '') : 'N/A',
           'Date': formData.date || 'N/A',
           'Hemodialysis NIO': formData.hemodialysisNIO || 'N/A',
@@ -240,8 +241,8 @@ const DialysisFlowChart: React.FC = () => {
       XLSX.utils.book_append_sheet(workbook, worksheet, 'Dialysis Flow Chart');
 
       // Generate filename with current date and patient name
-      const patientName = selectedPatient ? 
-        (selectedPatient.firstName || selectedPatient.name) + 
+      const patientName = selectedPatient ?
+        (selectedPatient.firstName || selectedPatient.name) +
         (selectedPatient.lastName ? ' ' + selectedPatient.lastName : '') : 'Unknown';
       const date = formData.date || new Date().toISOString().split('T')[0];
       const filename = `Dialysis_Flow_Chart_${patientName.replace(/\s+/g, '_')}_${date}.xlsx`;
@@ -261,10 +262,10 @@ const DialysisFlowChart: React.FC = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     // Validate required fields
-    if (!formData.patientId || !formData.date || !formData.bloodAccess || 
-        !formData.hdStartingTime || !formData.hdClosingTime) {
+    if (!formData.patientId || !formData.date || !formData.bloodAccess ||
+      !formData.hdStartingTime || !formData.hdClosingTime) {
       setError('Please fill in all required fields');
       return;
     }
@@ -282,14 +283,14 @@ const DialysisFlowChart: React.FC = () => {
 
       const dialysisFlowChartData = {
         ...formData,
-        patientName: (selectedPatient.firstName || selectedPatient.name) + 
-                    (selectedPatient.lastName ? ' ' + selectedPatient.lastName : '')
+        patientName: (selectedPatient.firstName || selectedPatient.name) +
+          (selectedPatient.lastName ? ' ' + selectedPatient.lastName : '')
       };
 
       await dialysisFlowChartApi.addDialysisFlowChart(dialysisFlowChartData);
-      
+
       setSuccess('Dialysis flow chart saved successfully!');
-      
+
       // Reset form after successful submission
       setFormData({
         patientId: '',
@@ -349,20 +350,20 @@ const DialysisFlowChart: React.FC = () => {
       {/* <div className="dialysis-flow-chart-header">
         <h2 className="dialysis-flow-chart-title">Dialysis Flow Chart</h2>
       </div> */}
-      
+
       {/* Success and Error Messages */}
       {success && (
         <div className="alert alert-success" style={{ marginBottom: '1rem' }}>
           {success}
         </div>
       )}
-      
+
       {error && (
         <div className="alert alert-danger" style={{ marginBottom: '1rem' }}>
           {error}
         </div>
       )}
-      
+
       <div className="dialysis-flow-chart-form-container">
         <form onSubmit={handleSubmit}>
           {/* General Info */}
@@ -371,10 +372,10 @@ const DialysisFlowChart: React.FC = () => {
             <div className="form-grid">
               <div className="form-field">
                 <label>Patient</label>
-                <select 
-                  name="patientId" 
-                  value={formData.patientId} 
-                  onChange={handleChange} 
+                <select
+                  name="patientId"
+                  value={formData.patientId}
+                  onChange={handleChange}
                   required
                   disabled={loading}
                 >
@@ -628,29 +629,26 @@ const DialysisFlowChart: React.FC = () => {
           </div>
 
           <div className="form-buttons">
-            <button 
-              type="submit" 
-              className="btn-submit btn-with-gradient" 
+            <ButtonWithGradient
+              type="submit"
+              className="btn-submit"
               disabled={submitting}
-            >
-              {submitting ? 'Saving...' : 'Submit'}
-            </button>
-            <button 
-              type="button" 
-              className="btn-print btn-with-gradient" 
+              text={submitting ? 'Saving...' : 'Submit'}
+            />
+            <ButtonWithGradient
+              type="button"
+              className="btn-print"
               onClick={handlePrint}
               disabled={submitting}
-            >
-              Print
-            </button>
-            <button 
-              type="button" 
-              className="btn-export-excel btn-with-gradient" 
+              text="Print"
+            />
+            <ButtonWithGradient
+              type="button"
+              className="btn-export-excel"
               onClick={handleExportExcel}
               disabled={submitting}
-            >
-              Export to Excel
-            </button>
+              text="Export to Excel"
+            />
           </div>
         </form>
       </div>
