@@ -11,7 +11,8 @@ import "../styles/Sidebar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 // import logo from '../assets/logo.png';
-import sidebarLogo from "../assets/sidebarLogo.png";
+import sidebarLogo from "../assets/sidebarlogo.png";
+import '../styles/sidebar.css'
 
 interface SideBarProps {
   collapsed?: boolean;
@@ -39,15 +40,16 @@ const SideBar: React.FC<SideBarProps> = ({ collapsed = false }) => {
           <div className="sidebar-date">
             <h6 className="sidebar-date-heading">
               @Anchal {new Intl.DateTimeFormat('en-GB', {
-                day:'2-digit',
-                month:'2-digit',
-                year:'numeric'
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
               }).format(new Date())}
             </h6>
+
           </div>
           <input
             type="text"
-            className="searchbar-input"
+            className="searchbar"
             placeholder="Search Menu- Ctrl + M"
           />
         </div>
@@ -60,95 +62,123 @@ const SideBar: React.FC<SideBarProps> = ({ collapsed = false }) => {
               className={({ isActive }) =>
                 isActive ? "sidebar-heading2 active" : "sidebar-heading2"
               }
-              title=""
+              title="Dialysis Management"
             >
-              central sterile Department
+              Dialysis Management
             </NavLink>
           </li>
           <ul className="sidebar-sublist">
             <li>
               <NavLink
-                to="/request-management"
-                style={{fontWeight:400,color:"#cccccc"}}
+                to="/"
+                style={{ fontWeight: 400, color: "#cccccc" }}
                 className={({ isActive }) =>
                   isActive ? "nav-item active" : "nav-item"
                 }
-                title={collapsed ? "Request Management" : ""}
+                title={collapsed ? "Dashboard" : ""}
               >
                 <span>
                   <FontAwesomeIcon icon={faCaretRight} />
                 </span>
-                {!collapsed && "Request Management"}
+                {!collapsed && "Dashboard"}
               </NavLink>
             </li>
             <li>
               <NavLink
-                to="/receive-items" style={{fontWeight:400,color:"#cccccc"}}
+                to="/registration" style={{ fontWeight: 400, color: "#cccccc" }}
                 className={({ isActive }) =>
                   isActive ? "nav-item active" : "nav-item"
                 }
-                title={collapsed ? "Receive Items" : ""}
+                title={collapsed ? "Patient Registration" : ""}
               >
                 <span>
                   <FontAwesomeIcon icon={faCaretRight} />
                 </span>
-                {!collapsed && "Receive Items"}
+                {!collapsed && "Patient Registration"}
               </NavLink>
             </li>
             <li>
               <NavLink
-                to="/sterilization-process" style={{fontWeight:400,color:"#cccccc"}}
+                to="/schedule" style={{ fontWeight: 400, color: "#cccccc" }}
                 className={({ isActive }) =>
                   isActive ? "nav-item active" : "nav-item"
                 }
-                title={collapsed ? "Sterilization Process" : ""}
+                title={collapsed ? "Schedule" : ""}
               >
                 <span>
                   <FontAwesomeIcon icon={faCaretRight} />
                 </span>
-                {!collapsed && "Sterilization Process"}
+                {!collapsed && "Schedule"}
               </NavLink>
             </li>
             <li>
               <NavLink
-                to="/issue-item" style={{fontWeight:400,color:"#cccccc"}}
+                to="/process" style={{ fontWeight: 400, color: "#cccccc" }}
                 className={({ isActive }) =>
                   isActive ? "nav-item active" : "nav-item"
                 }
-                title={collapsed ? "Issue Item" : ""}
+                title={collapsed ? "Start Dialysis" : ""}
               >
                 <span>
                   <FontAwesomeIcon icon={faCaretRight} />
                 </span>
-                {!collapsed && "Issue Item"}
+                {!collapsed && "Start Dialysis"}
               </NavLink>
             </li>
             <li>
               <NavLink
-                to="/stock-management" style={{fontWeight:400,color:"#cccccc"}}
+                to="/dialysis-flow-chart" style={{ fontWeight: 400, color: "#cccccc" }}
                 className={({ isActive }) =>
                   isActive ? "nav-item active" : "nav-item"
                 }
-                title={collapsed ? "Stock Management" : ""}
+                title={collapsed ? "Dialysis Flow Chart" : ""}
               >
                 <span>
                   <FontAwesomeIcon icon={faCaretRight} />
                 </span>
-                {!collapsed && "Stock Management"}
+                {!collapsed && "Dialysis Flow Chart"}
               </NavLink>
             </li>
             <li>
               <NavLink
-                to="/consumption-reports" style={{fontWeight:400,color:"#cccccc"}}
+                to="/haemodialysis-record-details" style={{ fontWeight: 400, color: "#cccccc" }}
                 className={({ isActive }) =>
                   isActive ? "nav-item active" : "nav-item"
                 }
-                title={collapsed ? "Consumption Reports" : ""}
+                title={collapsed ? "HD Record" : ""}
               >
                 <span>
                   <FontAwesomeIcon icon={faCaretRight} />
                 </span>
-                {!collapsed && "Consumption Reports"}
+                {!collapsed && "HD Record"}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/billing" style={{ fontWeight: 400, color: "#cccccc" }}
+                className={({ isActive }) =>
+                  isActive ? "nav-item active" : "nav-item"
+                }
+                title={collapsed ? "Billing" : ""}
+              >
+                <span>
+                  <FontAwesomeIcon icon={faCaretRight} />
+                </span>
+                {!collapsed && "Billing"}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/history" style={{ fontWeight: 400, color: "#cccccc" }}
+                className={({ isActive }) =>
+                  isActive ? "nav-item active" : "nav-item"
+                }
+                title={collapsed ? "History" : ""}
+              >
+                <span>
+                  <FontAwesomeIcon icon={faCaretRight} />
+                </span>
+                {!collapsed && "History"}
               </NavLink>
             </li>
           </ul>

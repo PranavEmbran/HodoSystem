@@ -9,6 +9,8 @@ import './Schedule.css';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import SectionHeading from '../components/SectionHeading';
+import PageContainer from '../components/PageContainer';
+
 
 interface ScheduleFormValues {
   patientId: string;
@@ -144,9 +146,10 @@ const Schedule: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void 
     <>
       <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
-        <div className="main-container" style={{ height: '100%' }}>
+        {/* <div className="main-container" style={{ height: '100%' }}> */}
+        <PageContainer>
           {/* <div style={{ width: '100%', padding: '10px',marginTop: '-20px' }}> */}
-            <SectionHeading title="Schedule" subtitle="Manage and view dialysis appointments" />
+          <SectionHeading title="Schedule" subtitle="Manage and view dialysis appointments" />
           {/* </div> */}
           <Row className="mb-4">
             <Col>
@@ -295,7 +298,8 @@ const Schedule: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void 
             </table>
             {schedulesTotalPages > 1 && renderPagination(schedulesPage, schedulesTotalPages, setSchedulesPage, schedulesRowsPerPage, setSchedulesRowsPerPage)}
           </div>
-        </div>
+          {/* </div> */}
+        </PageContainer>
         <Footer />
       </Container>
     </>

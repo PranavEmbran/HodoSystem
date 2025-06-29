@@ -11,6 +11,7 @@ import { scheduleApi } from '../api/scheduleApi';
 import { historyApi } from '../api/historyApi';
 import { Patient, ScheduleEntry, History } from '../types';
 import SectionHeading from '../components/SectionHeading';
+import PageContainer from '../components/PageContainer';
 
 interface Stat {
   label: string;
@@ -319,7 +320,8 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
     <>
       <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
-        <div className="main-container">
+        <PageContainer>
+          {/* <div className="main-container"> */}
 
           <SectionHeading title="Dashboard" subtitle="Overview and quick stats for dialysis management" />
           <Row className="mb-4">
@@ -431,10 +433,10 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
           </div>
           {/* </Col> */}
           {/* </Row> */}
-        </div>
+          {/* </div> */}
+        </PageContainer>
         <Footer />
       </Container>
-      {/* </Container> */}
     </>
   );
 };

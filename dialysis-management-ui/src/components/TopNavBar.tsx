@@ -75,7 +75,7 @@ const TopNavBar: React.FC = () => {
               <NavLink
                 to="/dashboard"
                 className={({ isActive }) => isActive ? 'active' : ''}
-                style={{ fontSize: '14px', fontWeight: 400,color:'#cccccc' }}
+                style={{ fontSize: '14px', fontWeight: 400, color: '#cccccc' }}
               >
                 Dashboard
               </NavLink>
@@ -84,7 +84,7 @@ const TopNavBar: React.FC = () => {
               <NavLink
                 to="/insurance"
                 className={({ isActive }) => isActive ? 'active' : ''}
-                style={{ fontSize: '14px', fontWeight: 400,color:'#cccccc' }}
+                style={{ fontSize: '14px', fontWeight: 400, color: '#cccccc' }}
               >
                 Billing
               </NavLink>
@@ -93,7 +93,7 @@ const TopNavBar: React.FC = () => {
               <NavLink
                 to="/documents"
                 className={({ isActive }) => isActive ? 'active' : ''}
-                style={{ fontSize: '14px', fontWeight: 400,color:'#cccccc' }}
+                style={{ fontSize: '14px', fontWeight: 400, color: '#cccccc' }}
               >
                 Pharmacy
               </NavLink>
@@ -102,7 +102,7 @@ const TopNavBar: React.FC = () => {
               <NavLink
                 to="/documents"
                 className={({ isActive }) => isActive ? 'active' : ''}
-                style={{ fontSize: '14px', fontWeight: 400,color:'#cccccc' }}
+                style={{ fontSize: '14px', fontWeight: 400, color: '#cccccc' }}
               >
                 Appointments
               </NavLink>
@@ -124,7 +124,7 @@ const TopNavBar: React.FC = () => {
                 style={{ fontSize: '14px', fontWeight: 400, color: '#cccccc', background: 'none', border: 'none', cursor: 'pointer' }}
               >
                 {/* <a href="" className="dropdown-toggle" onClick={() => setDropdownOpen(!dropdownOpen)}>More</a> */}
-                More <i className="fas fa-caret-down" style={{fontSize:'12px',marginLeft:'4px'}}></i>
+                More <i className="fas fa-caret-down" style={{ fontSize: '12px', marginLeft: '4px' }}></i>
 
               </button>
               {dropdownOpen && (
@@ -167,8 +167,8 @@ const TopNavBar: React.FC = () => {
             <input type="search" name="search" className='searchBarInput' placeholder="Search Patient with Name or Card No. or Mobile No." />
           </div>
           <div className="nav-buttons">
-            <li className='nav-list-button'><NavLink to="/dashboard" className={({ isActive }) => isActive ? 'active' : ''} style={{fontWeight:400}}>New Sale</NavLink></li>
-            <li className='nav-list-button'><NavLink to="/register-vehicle" className={({ isActive }) => isActive ? 'active' : ''} style={{fontWeight:400}}> <Plus size={16} /> Add Patient</NavLink></li>
+            <li className='nav-list-button'><NavLink to="/dashboard" className={({ isActive }) => isActive ? 'active' : ''} style={{ fontWeight: 400 }}>New Sale</NavLink></li>
+            <li className='nav-list-button'><NavLink to="/register-vehicle" className={({ isActive }) => isActive ? 'active' : ''} style={{ fontWeight: 400 }}> <Plus size={16} /> Add Patient</NavLink></li>
           </div>
           <div className="nav-div-main">
             <div className="nav-div">
@@ -197,36 +197,36 @@ const TopNavBar: React.FC = () => {
                       Insurance Expiry Alerts
                     </div>
                     {/* {getVisibleNotifications().length > 0 && ( */}
-                      <button 
-                        className="clear-notifications-btn"
-                        onClick={handleClearNotifications}
-                        title="Clear all notifications"
-                      >
-                        Clear
-                      </button>
+                    <button
+                      className="clear-notifications-btn"
+                      onClick={handleClearNotifications}
+                      title="Clear all notifications"
+                    >
+                      Clear
+                    </button>
                     {/* )} */}
                   </div>
                   {/* {getVisibleNotifications().length === 0 ? ( */}
-                    <div className="notification-empty">
-                      No vehicles with insurance expiring soon.
-                    </div>
+                  <div className="notification-empty">
+                    No vehicles with insurance expiring soon.
+                  </div>
                   {/* ) : ( */}
-                    <ul className="notification-list">
-                      {/* {getVisibleNotifications().map((v, idx) => ( */}
-                        <li  className="notification-item">
-                          <span className="notif-reg text-uppercase">
-                            {/* {v.registrationNumber} */}
-                          </span>{" "}
-                          <span className="notif-make text-capitalize">
-                            {/* ({v.make} {v.model}) */}
-                          </span>
-                          <br />
-                          <span className="notif-expiry">
-                            {/* Expires: {v.insurance?.endDate} */}
-                          </span>
-                        </li>
-                      {/* ))} */}
-                    </ul>
+                  <ul className="notification-list">
+                    {/* {getVisibleNotifications().map((v, idx) => ( */}
+                    <li className="notification-item">
+                      <span className="notif-reg text-uppercase">
+                        {/* {v.registrationNumber} */}
+                      </span>{" "}
+                      <span className="notif-make text-capitalize">
+                        {/* ({v.make} {v.model}) */}
+                      </span>
+                      <br />
+                      <span className="notif-expiry">
+                        {/* Expires: {v.insurance?.endDate} */}
+                      </span>
+                    </li>
+                    {/* ))} */}
+                  </ul>
                   {/* )} */}
                 </div>
               )}

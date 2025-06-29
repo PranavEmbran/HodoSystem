@@ -2,6 +2,7 @@ import React from 'react';
 import HaemodialysisRecordDetails from '../components/HaemodialysisRecordDetails';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import PageContainer from '../components/PageContainer';
 import SectionHeading from '../components/SectionHeading';
 import { Row, Col, Container } from 'react-bootstrap';
 
@@ -11,14 +12,16 @@ const HaemodialysisRecordDetailsPage: React.FC<{ sidebarCollapsed: boolean; togg
     // <Container fluid className={`haemodialysis-record-page-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
     <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
       <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
-      <div className="main-container">
+      <PageContainer>
+      {/* <div className="main-container"> */}
         {/* <div style={{ width: '100%', padding: '10px',marginTop: '-20px' }}> */}
-          <SectionHeading title="Haemodialysis Record Details" subtitle="Detailed records for haemodialysis sessions" />
+        <SectionHeading title="Haemodialysis Record Details" subtitle="Detailed records for haemodialysis sessions" />
         {/* </div> */}
-      <HaemodialysisRecordDetails />
-      </div>
+        <HaemodialysisRecordDetails />
+      {/* </div> */}
+      </PageContainer>
       <Footer />
-      </Container>
+    </Container>
   );
 };
 

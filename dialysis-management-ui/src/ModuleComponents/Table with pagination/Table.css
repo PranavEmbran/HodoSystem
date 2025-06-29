@@ -2,7 +2,7 @@
 .table-container {
   background: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   /* padding: 24px; */
   margin: 24px 0;
   overflow-x: auto;
@@ -15,11 +15,12 @@
   border-collapse: separate;
   border-spacing: 0;
   background: #fff;
-  font-family: 'poppins';   
+  font-family: 'poppins';
   font-size: 14px;
 }
 
-.custom-table th, .custom-table td {
+.custom-table th,
+.custom-table td {
   padding: 9px 6px;
   text-align: left;
   padding-left: 20px;
@@ -57,10 +58,13 @@
 
 
 @media (max-width: 900px) {
-  .custom-table th, .custom-table td {
+
+  .custom-table th,
+  .custom-table td {
     padding: 10px 8px;
     font-size: 13px;
   }
+
   .table-container {
     padding: 8px;
   }

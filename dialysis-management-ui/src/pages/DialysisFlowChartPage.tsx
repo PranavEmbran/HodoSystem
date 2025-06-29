@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import DialysisFlowChart from '../components/DialysisFlowChart';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import PageContainer from '../components/PageContainer';
 import SectionHeading from '../components/SectionHeading';
 import { Row, Col, Container } from 'react-bootstrap';
 
@@ -16,12 +17,14 @@ const DialysisFlowChartPage: React.FC<{ sidebarCollapsed: boolean; toggleSidebar
     <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
 
       <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
-      <div className="main-container">
+      <PageContainer>
+      {/* <div className="main-container"> */}
         {/* <div style={{ width: '100%', padding: '10px',marginTop: '-20px' }}> */}
-          <SectionHeading title="Dialysis Flow Chart" subtitle="Dialysis flow record for specific patient" />
+        <SectionHeading title="Dialysis Flow Chart" subtitle="Dialysis flow record for specific patient" />
         {/* </div> */}
         <DialysisFlowChart />
-      </div>
+      {/* </div> */}
+      </PageContainer>
       <Footer />
     </Container>
   );

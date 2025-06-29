@@ -1,10 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  box-sizing: border-box;
+}
+
 .sidebar {
   /* width: 235px; */
   width: 255px;
   /* width: 319.984px; */
   z-index: 1000;
   height: 100vh;
-  background-color: #1f1f1f;
+  background-color: black;
   /* padding: 20px; */
   overflow-y: auto;
   /* overflow-y: scroll; */
@@ -21,7 +29,7 @@
   padding: 8px 15px;
 }
 
-.sidebar-heading2{
+.sidebar-heading2 {
   background-color: #80def7;
   /* font-weight: 700; */
   /* font-weight: bold; */
@@ -133,20 +141,18 @@ span {
 
 .sidebar-content {
   display: flex;
-  /* padding: 0; */
   flex-direction: column;
   align-items: flex-start;
-  /* border: 1px solid red; */
 }
 
 .sidebar-top {
-  /* border: 1px solid yellow; */
   display: flex;
   width: 100%;
   align-items: center;
-  gap: 10px; 
+  gap: 10px;
 }
-.sidebar-profile{
+
+.sidebar-profile {
   margin-top: -20px;
   padding: 0;
   margin-left: 20px;
@@ -156,7 +162,7 @@ span {
 }
 
 .sidebar-profile img {
-  width: 60px; 
+  width: 60px;
   height: 60px;
   filter: blur(0.7px);
   object-fit: cover;
@@ -165,6 +171,7 @@ span {
   border-collapse: collapse;
   transition: all 0.3s ease;
 }
+
 .sidebar-profile.collapsed img {
   display: none;
 }
@@ -173,14 +180,16 @@ span {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align:center;
+  text-align: center;
   color: white;
   font-size: 12px;
   margin-left: 0;
-  margin-top: -12px;
+  margin-top: 12px;
   /* border: 1px solid red; */
 }
-.sidebar-text h4,p{
+
+.sidebar-text h4,
+p {
   color: rgb(3, 139, 164);
 }
 
@@ -190,58 +199,67 @@ span {
   /* border: 1px solid red; */
   line-height: 17.5px;
   width: 100%;
-  max-width: 99%; /* or set a fixed width */
-  background-color: #1f1f1f;
+  max-width: 99%;
+  /* or set a fixed width */
+  background-color: transparent;
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.075) 0px 1px 1px 0px inset;
   outline: none;
 }
-.searchbar input{
+
+.searchbar input {
   width: 100%;
-  background-color: transparent;
   padding: 8px 6px 6px 10px;
   border: 1px solid rgb(128, 222, 247);
   color: white;
 }
-.searchbar::placeholder{
+
+.searchbar::placeholder {
   color: white;
 }
-.searchbar.collapsed{
+
+.searchbar.collapsed {
   display: hidden;
   overflow: hidden;
   background-color: transparent;
 }
-.sidebar-para{
+
+.sidebar-para {
   font-family: Geneva, Arial, Helvetica, sans-serif;
   font-size: 18px;
   font-weight: 500;
-  margin-top: -20px;
+  margin-top: -10px;
 }
-.sidebar-para2{
+
+.sidebar-para2 {
   font-family: Geneva, Arial, Helvetica, sans-serif;
   /* font-size: 18px; */
   font-weight: 700;
   margin-top: -15px;
 }
-.sidebar-heading{
+
+.sidebar-heading {
   font-weight: 600;
   font-stretch: 100%;
   color: white;
   margin-bottom: 20px;
 }
-.sidebar-date{
+
+.sidebar-date {
   margin: 0;
   margin-top: -5px;
   padding: 0;
   width: 100%;
   text-align: center;
 }
-.sidebar-date-heading{
+
+.sidebar-date-heading {
   margin: 0;
   padding: 0;
   color: white;
   font-weight: 600;
 }
-.sidebar-sublist{
+
+.sidebar-sublist {
   width: 100%;
 }

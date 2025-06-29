@@ -8,6 +8,7 @@ import { billingApi } from '../api/billingApi';
 import { patientsApi } from '../api/patientsApi';
 import './Billing.css';
 import Footer from '../components/Footer';
+import PageContainer from '../components/PageContainer';
 import Header from '../components/Header';
 import type { Patient, Billing as BillingType } from '../types';
 import SectionHeading from '../components/SectionHeading';
@@ -152,10 +153,11 @@ const Billing: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void }
       {/* <Container fluid className={`billing-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}> */}
       <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
-        <div className="main-container">
+        <PageContainer>
+          {/* <div className="main-container"> */}
 
           {/* <div style={{ width: '100%', padding: '10px', marginTop: '-20px' }}> */}
-            <SectionHeading title="Billing" subtitle="Manage and view patient billing records" />
+          <SectionHeading title="Billing" subtitle="Manage and view patient billing records" />
           {/* </div> */}
 
 
@@ -324,7 +326,8 @@ const Billing: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void }
               </div>
             </div>
           )}
-        </div>
+          {/* </div> */}
+        </PageContainer>
         <Footer />
       </Container>
     </>

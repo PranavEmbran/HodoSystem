@@ -24,37 +24,37 @@ const Table: React.FC<TableProps> = ({ columns, data }) => {
   return (
     <>
       <div className="table-container">
-      <table className="custom-table">
-        <thead>
-          <tr>
-            {columns.map((col) => (
-              <th key={col.key}>{col.header}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {paginatedData.length === 0 ? (
+        <table className="custom-table">
+          <thead>
             <tr>
-              <td colSpan={columns.length + 1} style={{ textAlign: 'center' }}>No data found.</td>
+              {columns.map((col) => (
+                <th key={col.key}>{col.header}</th>
+              ))}
             </tr>
-          ) : (
-            paginatedData.map((row, idx) => (
-              <tr key={row.id || idx}>
-                {columns.map((col) => (
-                  <td key={col.key}>
-                    {typeof row[col.key] === 'number' 
-                      ? row[col.key].toString()
-                      : row[col.key]}
-                  </td>
-                ))}
+          </thead>
+          <tbody>
+            {paginatedData.length === 0 ? (
+              <tr>
+                <td colSpan={columns.length + 1} style={{ textAlign: 'center' }}>No data found.</td>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
-      
-    </div>
-    <div>
+            ) : (
+              paginatedData.map((row, idx) => (
+                <tr key={row.id || idx}>
+                  {columns.map((col) => (
+                    <td key={col.key}>
+                      {typeof row[col.key] === 'number'
+                        ? row[col.key].toString()
+                        : row[col.key]}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+
+      </div>
+      <div>
         <Pagination
           page={page}
           totalPages={totalPages}

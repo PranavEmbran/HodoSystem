@@ -1,6 +1,5 @@
-
-.footer-container{
-/* position: fixed; */
+.footer-container {
+    /* position: fixed; */
     /* bottom: 40px;
     right: 50px;
     left: 50px; */
@@ -26,9 +25,11 @@
     gap: 10px;
     flex: 1;
 }
-span{
+
+span {
     width: fit-content;
 }
+
 .footer-right {
     display: flex;
     align-items: center;
@@ -62,8 +63,10 @@ span{
     font-size: 24px;
     color: #5a5a5a;
     transition: all 0.3s ease;
-    text-shadow: 0 0 1px #5a5a5a; /* Adds thickness to the symbol */
-    font-weight: bold; /* Makes the symbol bolder */
+    text-shadow: 0 0 1px #5a5a5a;
+    /* Adds thickness to the symbol */
+    font-weight: bold;
+    /* Makes the symbol bolder */
 }
 
 
@@ -71,4 +74,3 @@ span{
     background: none;
     color: #5a5a5a;
 }
-

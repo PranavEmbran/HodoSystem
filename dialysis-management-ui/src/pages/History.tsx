@@ -3,6 +3,7 @@ import { historyApi } from '../api/historyApi';
 import { patientsApi } from '../api/patientsApi';
 import './History.css';
 import Footer from '../components/Footer';
+import PageContainer from '../components/PageContainer';
 import Header from '../components/Header';
 import type { Patient, History } from '../types';
 import SectionHeading from '../components/SectionHeading';
@@ -65,9 +66,10 @@ const History: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void }
       {/* <Container fluid className={`history-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}> */}
       <Container fluid className={`home-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
-        <div className="main-container">
+        <PageContainer>
+          {/* <div className="main-container"> */}
           {/* <div style={{ width: '100%', padding: '10px',marginTop: '-20px' }}> */}
-            <SectionHeading title="History" subtitle="View and manage dialysis session history" />
+          <SectionHeading title="History" subtitle="View and manage dialysis session history" />
           {/* </div> */}
           <div className="history-header">
             <h2 className="history-title">Dialysis History</h2>
@@ -104,7 +106,7 @@ const History: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void }
               <div className="history-timeline-header">
                 <h3 className="history-timeline-title">Treatment History</h3>
               </div> */}
-          <div className='history-table-container' style={{ width: '100%', marginLeft: 0, marginRight: 0, paddingBottom: 0}}>
+          <div className='history-table-container' style={{ width: '100%', marginLeft: 0, marginRight: 0, paddingBottom: 0 }}>
             {/* <h3 className="mb-4 history-title" style={{ marginLeft: '20px' }}>Treatment History</h3> */}
 
             {loading ? (
@@ -119,7 +121,7 @@ const History: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void }
               // <div className="table-responsive">
               //   <table className="table">
               <div className="table-container" style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-              <table className="vehicles-table">
+                <table className="vehicles-table">
                   <thead>
                     <tr>
                       <th>Date</th>
@@ -141,14 +143,15 @@ const History: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void }
                     ))}
                   </tbody>
                 </table>
-                
+
               </div>
             )}
           </div>
-        </div>
-      {/* </div> */}
-      <Footer />
-    </Container >
+          {/* </div> */}
+          {/* </div> */}
+        </PageContainer>
+        <Footer />
+      </Container >
     </>
   );
 };

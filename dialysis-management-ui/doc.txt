@@ -3,3 +3,8 @@ npm install react-bootstrap bootstrap
 
 npm install @primer/octicons-react
 
+npm install @fortawesome/free-solid-svg-icons
+
+npm install --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome
+
+npm audit fix --force
